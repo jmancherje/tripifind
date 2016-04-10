@@ -1,4 +1,7 @@
-# sentimentalsoymilk
+![Image of Tripifind Logo]
+(http://i.imgur.com/h80L1xq.png)
+
+# Tripifind
 Itinerary manager
 
 1. npm install
