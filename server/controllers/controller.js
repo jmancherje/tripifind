@@ -2,9 +2,10 @@
 var Trips = require('../models/trips.js');
 var TripItems = require('../models/tripItem.js');
 var request = require('request');
-var key = require('../env/config')
 var async = require('async');
 
+var FOURSQUARE_APIKEY = process.env.FOURSQUARE_API;
+var FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET;
 
 
 var filterTripData = function(responseObj) {
@@ -83,7 +84,7 @@ module.exports = {
   // Route : /activities/*'
   fetchCityData: function(req, res, next) {
     var cityState = req.url.split('/')[2];
-    return request('https://api.foursquare.com/v2/venues/explore?client_id='+key.API+'&client_secret='+key.SECRET+'&v=20130815&near='+cityState+'&venuePhotos=1', function(err, response, body) {
+    return request('https://api.foursquare.com/v2/venues/explore?client_id='+FOURSQUARE_API+'&client_secret='+FOURSQUARE_SECRET+'&v=20130815&near='+cityState+'&venuePhotos=1', function(err, response, body) {
       // prevent server crashing when responseObj is undefined
       if (!err && JSON.parse(body).meta.code === 200) { 
         var filteredResults = filterTripData(JSON.parse(body).response.groups[0].items);

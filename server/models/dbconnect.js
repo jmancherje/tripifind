@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-mongoURI = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://soymilktest:justin@ds039125.mongolab.com:39125/soymilk';
+mongoURI = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
 mongoose.connect(mongoURI);
 
 var db = mongoose.connection;
