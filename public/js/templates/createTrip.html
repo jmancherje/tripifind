@@ -1,0 +1,107 @@
+<!-- navigation -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#landing">Tripify</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/#myTrips">My Trips</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!-- content -->
+<div class="creation-container">
+  <div class="col-xs-6 text-center left-column">
+    <h4>Make Your Playlist</h4>
+
+    <div class="ShowForm" ng-show="!formCompleted">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Playlist Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Birthday Bonanza" ng-model="itineraryName">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">City</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword3" placeholder="San Francisco" ng-model="city">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">State</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword3" placeholder="CA" ng-model="state">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button ng-click="startItinerary()" type="submit" class="btn btn-success">Start Itinerary</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="itineraryDetails" ng-show="!!formCompleted">
+
+      <h2>{{itineraryName}}</h2>
+      <h4>{{city}}, {{state}}</h4>
+      <div class="activitylist-left">
+        <ul>
+          <li class="foursquare-li li-remove" ng-repeat="activity in itinerary track by $index">
+            <div class="row">
+              <p><strong>{{activity.name}}</strong></p>
+              <p>{{activity.address.split(',')[0]}}</p>
+              <p>{{activity.category}}</p>
+              <span id="remove-button" class="glyphicon glyphicon-remove" ng-click="removeFromTrip()"></span>
+              <!-- <button id="remove-button" class="btn btn-danger glyphicon glyphicon-remove" ng-click="removeFromTrip()"></button> -->
+            </div>
+          </li>
+        </ul>
+      </div>
+        <button class="btn btn-success" ng-click="saveItinerary()">Save Your Itinerary!</button>
+    </div>
+
+<!--     <div class="itineraryItems" ng-show="!!formCompleted">
+      <div ng-repeat="activity in itinerary track by $index">
+        {{ item.name }}
+      </div>
+      <button class="btn btn-success" ng-click="saveItinerary()">Save Your Itinerary!</button>
+    </div> -->
+
+
+  </div>
+  <div class="selection-list col-xs-6 text-center right-column">
+    <h4>Activities</h4>
+    <div class="activitylist-right">
+      <ul ng-show="formCompleted">
+        <li class="foursquare-li li-add" ng-repeat="activity in activities | orderBy:'-rating'">
+          <div class="row" ng-click="addToTrip()">
+              <img class="addActivityImage" src="{{activity.photo}}" alt="">
+              <p><strong>{{activity.name}}</strong></p>
+              <p>{{activity.address.split(',')[0]}}</p>
+              <p>{{activity.category}}</p>
+              <p>{{activity.rating}}/10</p>
+              <a href="{{activity.url}}" target="_blank">Website</a>
+              <!-- <button class="btn btn-success" ng-click="addToTrip()">Add</button> -->
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

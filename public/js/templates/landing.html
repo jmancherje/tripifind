@@ -1,0 +1,19 @@
+<h2 class="text-center">Tripify</h2>
+<a href="/#create" class="text-center" style="display: block">Make a Playlist</a>
+
+<h1 class="page-title">Popular Playlists:</h1>
+
+<input type="text" ng-model="filter.destination" id="landing-filter" placeholder="Search By City">
+
+<div class="myTrips" style="background-color: white">
+  <span class="playlist" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
+    <div class="playlist-img">
+      <img class="trip-img" src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
+    </div>
+    <div class="playlist-info">
+      <p class="glyphicon glyphicon-play-circle play-icon"></p>
+      <p class="trip-name">{{trip.name}}</p>
+      <p class="trip-destination">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
+    </div>
+  </span>
+</div>

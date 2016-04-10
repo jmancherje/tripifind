@@ -1,0 +1,31 @@
+{
+  "name": "Greenfield",
+  "description": "Itinerary",
+  "main": "index.js",
+  "authors": [
+    "Justin, Tessa, Liza, Josh"
+  ],
+  "license": "MIT",
+  "private": true,
+  "keywords": [
+    "angular"
+  ],
+  "homepage": "https://github.com/sentimentalsoymilk/sentimentalsoymilk",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "underscore": "~1.8.3",
+    "angular-mocks": "~1.4.8",
+    "bootstrap": "~3.3.6"
+  }
+}

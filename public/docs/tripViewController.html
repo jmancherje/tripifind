@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>tripViewController.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="authController.html">
+                  authController.js
+                </a>
+              
+                
+                <a class="source" href="createTripController.html">
+                  createTripController.js
+                </a>
+              
+                
+                <a class="source" href="landingController.html">
+                  landingController.js
+                </a>
+              
+                
+                <a class="source" href="myTripController.html">
+                  myTripController.js
+                </a>
+              
+                
+                <a class="source" href="tripViewController.html">
+                  tripViewController.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>tripViewController.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>angular.module(<span class="hljs-string">'app.trip'</span>, [<span class="hljs-string">'app.services'</span>])</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>ActivitiesData is a factory/service loaded from app.services
+$routeParams is used to get the trip mongoose _.id</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>.controller(<span class="hljs-string">'TripController'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">$scope, $http, ActivitiesData, $routeParams</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>$scope.id stores the trip mongoose _.id</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  $scope.id = $routeParams.id;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>ActivitiesData.getTripActivities returns and object containing
+the details for each activity stored in this trip
+$scope.activities stores an array of all activities
+$scope.name stores the name of the trip/playlist
+$scope.destination stores the destionation of the trip</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  ActivitiesData.getTripActivities($scope.id, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tripObj</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'tripobj '</span>, tripObj);
+    $scope.activities = tripObj.data.list;
+    $scope.name = tripObj.data.name;
+    $scope.destination = tripObj.data.destination;
+  });
+
+})</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

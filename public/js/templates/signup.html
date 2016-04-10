@@ -1,0 +1,16 @@
+<div class="signup-container">
+
+  <h3>Sign up:</h3>
+  <form>
+    <div class="form-group">
+      <input type="text" placeholder="username" ng-model="signUpUsername">
+      <input type="password" placeholder="password" ng-model="signUpPassword">
+      <input type="password" placeholder="confirm password">
+      <button ng-click="signup()">Sign up</button>
+    </div>
+  </form>
+  <h4> {{ signUpError }} </h4>
+  <p>Already registered? <a href="/#login">Login here</a></p>
+
+  
+</div>

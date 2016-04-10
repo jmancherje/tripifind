@@ -1,0 +1,48 @@
+{
+  "name": "greenfield",
+  "version": "1.0.0",
+  "description": "itinerary generator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "postinstall" : "bower install"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "author": "Justin Mancherje",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.5.2",
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.1.1",
+    "body-parser": "^1.14.2",
+    "bower" :"1.5.2",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "mongoose": "^4.3.4",
+    "morgan": "^1.6.1",
+    "nodemon": "^1.8.1",
+    "q": "^1.4.1",
+    "request": "^2.67.0",
+    "session": "^0.1.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^1.5.7",
+    "chai": "^3.4.1",
+    "clone-stats": "0.0.1",
+    "gulp": "^3.8.5",
+    "gulp-nodemon": "^1.0.4",
+    "gulp-shell": "^0.2.7",
+    "karma": "^0.13.15",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.1",
+    "karma-nyan-reporter": "0.0.43",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-sinon": "^1.0.4",
+    "karma-unicorn-reporter": "^0.1.4",
+    "mocha": "^2.3.4",
+    "pre-commit": "^1.1.1",
+    "sinon": "^1.17.2"
+  }
+}

@@ -1,0 +1,217 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+h1 {
+  margin-top: 0;
+}
+#landing-filter {
+  display: block;
+  margin: 0 auto 10px auto;
+}
+.activitylist-left {
+  height: 65vh;
+  overflow: auto;
+}
+.activitylist-right {
+  height: 80vh;
+  overflow: auto;
+}
+.addActivityImage {
+  border: 3px solid black;
+  height: 150px;
+  width: 150px;
+  float: left;
+}
+li.itineraies-li {
+  list-style: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding-left: 10px;
+  width: 100px;
+}
+.logout-button {
+  float: right;
+}
+.navigation {
+  height: 50px;
+}
+li.foursquare-li {
+  position: relative;
+  list-style: none;
+  border: 1px solid black;
+  transition: background-color 1s ease;
+  transition: color 0.6s ease;
+}
+li.li-add:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+#remove-button {
+  position: absolute;
+  font-size: 20px;
+  cursor: pointer;
+  right: 3px;
+  top: 3px;
+}
+span.playlist {
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  display: inline-block;
+  border: 1px solid black;
+  height: 215px;
+  width: 150px;
+  vertical-align: top;
+  /*padding: 15px;*/
+  margin: 10px;
+  /*transition: all .2s ease-in-out;*/
+  transition: background-color 1s ease;
+  background-color: white;
+  transition: color 0.6s ease;
+  color: #333333;
+}
+div.playlist-info {
+  height: 65px;
+}
+p.play-icon {
+  font-size: 42px;
+  position: relative;
+  top: -94px;
+  left: 53px;
+  visibility: hidden;
+  color: #C1C1C1;
+  z-index: 10;
+}
+span.playlist:hover .playlist-img {
+  /*transform: scale(1.1);*/
+  -webkit-filter: brightness(50%);
+}
+span.playlist:hover .playlist-info {
+  color: #C1C1C1;
+  background-color: black;
+}
+span.playlist:hover p.play-icon {
+  visibility: visible;
+}
+p.trip-name {
+  position: absolute;
+  top: 153px;
+  padding-left: 5px;
+  font-weight: bold;
+}
+p.trip-destination {
+  position: absolute;
+  bottom: -8px;
+  font-size: 11px;
+  padding-left: 5px;
+}
+img.trip-img {
+  width:149px;height:150px;margin:0px;border-width:0px;border-color:#000000;border-style:solid;
+}
+.page-title {
+  text-align: center;
+}
+div.myTrips {
+  width: 683px;
+  height: 75vh;
+  overflow: auto;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+div.playlist-img {
+  height:150px;
+  width: 150px;
+}
+.tripview-container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+/*splash*/
+.btn-spotify {
+  border-radius: 0;
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 600;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  outline: 0;
+  color: #F8F8FF;
+  background-color: #00CC66;
+  border: 0px ;
+  width: 240px;
+  height: 50px;
+  border-radius: 15px;
+  font-size: 22px;
+  margin-bottom: 5px
+}
+
+.suitcase {
+    width: 80px;
+    height: 60px;
+}
+
+.spotify-link {
+    margin-top: 5px
+    font-size: 30px;
+    color:black;
+    text-decoration: underline;
+    text-shadow: 2px 2px #000000;
+}
+
+#light{
+    font-size: 23px
+}
+
+.learn {
+    font-size: 23px;
+    color: #F8F8FF;
+    text-decoration: underline;
+    text-shadow: 2px 2px #000000;
+}
+
+.intro {
+    display: table;
+    width: 100%;
+    height: 100%;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+    background: url('https://images.unsplash.com/photo-1445810694374-0a94739e4a03?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=75e4e2d57b0f4ae0843bb15002118302') no-repeat center center fixed;
+    background-color: #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+#light{
+    font-size: 23px;
+    color: #F8F8FF;
+    text-shadow: 2px 2px #000000;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.full { height: 100%;}
+
+.brand-heading {
+  padding-top: 140px;
+  text-shadow: 2px 2px #000000;
+  text-align: center;
+}
+
+#title {
+  float :right;
+}
+
+.vote {
+  font-size: 30px;
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>controller.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>controller.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>var User = require(‘../models/users.js’);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> Trips = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../models/trips.js'</span>);
+<span class="hljs-keyword">var</span> TripItems = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../models/tripItem.js'</span>);
+<span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
+<span class="hljs-keyword">var</span> key = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../env/config'</span>)
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">async</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'async'</span>);
+
+
+
+<span class="hljs-keyword">var</span> filterTripData = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">responseObj</span>) </span>{
+  <span class="hljs-keyword">return</span> responseObj.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">totalData, item</span>) </span>{ 
+    <span class="hljs-keyword">var</span> location = item.venue.location;
+    <span class="hljs-keyword">var</span> photoURL = item.venue.featuredPhotos.items[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">var</span> notes = item.tips === <span class="hljs-literal">undefined</span> ? <span class="hljs-string">''</span> : item.tips[<span class="hljs-number">0</span>].text; 
+    <span class="hljs-keyword">var</span> tripItem = {
+      name: item.venue.name,
+      address: location.address + <span class="hljs-string">', '</span> + location.city + <span class="hljs-string">', '</span> + location.state + <span class="hljs-string">' - '</span> + location.cc,
+      city: location.city,
+      notes: notes,
+      category: item.venue.categories[<span class="hljs-number">0</span>].name,
+      rating: item.venue.rating,
+      photo: photoURL.prefix + <span class="hljs-string">'300x300'</span> + photoURL.suffix,
+      url: item.venue.url
+    };
+    totalData.push(tripItem); 
+    <span class="hljs-keyword">return</span> totalData;
+  }, []);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p><h4> parseCityName </h4>
+Accepts the decoded request url, reformats it and 
+returns a string of the city name </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> parseCityName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">cityRequest</span>) </span>{
+    <span class="hljs-keyword">var</span> cityLowercase = cityRequest.split(<span class="hljs-string">','</span>)[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">var</span> city = <span class="hljs-string">''</span>;
+    <span class="hljs-keyword">if</span> (cityLowercase.indexOf(<span class="hljs-string">' '</span>) &gt; <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">var</span> splitCity = cityLowercase.split(<span class="hljs-string">' '</span>);
+      <span class="hljs-keyword">var</span> firstCityHalf = splitCity[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>].toUpperCase() + splitCity[<span class="hljs-number">0</span>].slice(<span class="hljs-number">1</span>);
+      <span class="hljs-keyword">var</span> secondCityHalf = splitCity[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>].toUpperCase() + splitCity[<span class="hljs-number">1</span>].slice(<span class="hljs-number">1</span>);
+      city += firstCityHalf + <span class="hljs-string">' '</span> + secondCityHalf;
+    } <span class="hljs-keyword">else</span> {
+      city += cityLowercase[<span class="hljs-number">0</span>].toUpperCase() + cityLowercase.slice(<span class="hljs-number">1</span>);
+    }
+    <span class="hljs-keyword">return</span> city;
+}
+
+<span class="hljs-built_in">module</span>.exports = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p><h4> searchStoredData </h4> 
+Parses the city name from the request url param and 
+checks to see if our database containss that city.
+If we have a record for that city that is sent in the response, 
+otherwise fetch directly from the foursquare API using <h4> fetchCityData </h4> 
+and response with the API data
+Method: GET
+Route : /activities/*’</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+  searchStoredData: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
+    <span class="hljs-keyword">var</span> city = parseCityName(<span class="hljs-built_in">decodeURI</span>(req.url.split(<span class="hljs-string">'/'</span>)[<span class="hljs-number">2</span>]));
+    <span class="hljs-built_in">console</span>.log(city);
+    TripItems.find({ city: city }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, list</span>) </span>{
+      <span class="hljs-keyword">if</span> (list.length &lt; <span class="hljs-number">1</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>if (list.length &lt; 1) {
+City not cached; fetching data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"City not cached; fetching data"</span>);
+        next();
+      }
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!err) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Pulling list from DB</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Pulling list from DB"</span>);
+        res.send(list);
+      } <span class="hljs-keyword">else</span> {
+        res.send(err);
+      }
+    });
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p><h4> fetchCityData </h4> 
+Fetches data from the Foursquare API if the data is not 
+already stored in our database
+Method: GET
+Route : /activities/*’</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  fetchCityData: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
+    <span class="hljs-keyword">var</span> cityState = req.url.split(<span class="hljs-string">'/'</span>)[<span class="hljs-number">2</span>];
+    <span class="hljs-keyword">return</span> request(<span class="hljs-string">'https://api.foursquare.com/v2/venues/explore?client_id='</span>+key.API+<span class="hljs-string">'&amp;client_secret='</span>+key.SECRET+<span class="hljs-string">'&amp;v=20130815&amp;near='</span>+cityState+<span class="hljs-string">'&amp;venuePhotos=1'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, response, body</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>prevent server crashing when responseObj is undefined</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!err &amp;&amp; <span class="hljs-built_in">JSON</span>.parse(body).meta.code === <span class="hljs-number">200</span>) { 
+        <span class="hljs-keyword">var</span> filteredResults = filterTripData(<span class="hljs-built_in">JSON</span>.parse(body).response.groups[<span class="hljs-number">0</span>].items);
+        <span class="hljs-built_in">module</span>.exports.saveCityData(filteredResults).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">results, err</span>) </span>{
+          <span class="hljs-keyword">if</span> (err) {
+            res.send(err);
+          }
+        res.send(<span class="hljs-built_in">JSON</span>.stringify(results));
+        });
+      } <span class="hljs-keyword">else</span> {
+        res.status(<span class="hljs-number">400</span>).send(err);
+      }
+    });
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p><h4>  saveCityData </h4> 
+Adds the searched city to the database
+Model: TripItems</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  saveCityData: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">results, next</span>) </span>{
+    <span class="hljs-keyword">return</span> TripItems.create(results, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, results</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-built_in">console</span>.log(err);
+      }
+    });    
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p><h4> createTrip </h4> 
+Accepts a JSON object to be stored.
+Example : tripObj = {
+  name: name,
+  city: city,
+  state: state,
+  activities: activities,
+  image: image
+};
+Method: PUT
+Route : /trips</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+  createTrip: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
+    <span class="hljs-keyword">var</span> playlist = {
+      name: req.body.name,
+      destination: [req.body.city, req.body.state],
+      activities: req.body.activities,
+      image: req.body.image
+    };
+    Trips.create(playlist, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, results</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-built_in">console</span>.log(err);
+      }
+      res.json(results);
+    });
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p><h3> GetAllTrips </h3> 
+Returns a JSON of all the data present in the database
+Method: Get
+Route : /trips</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  getAllTrips: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) </span>{
+    Trips.find(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, results</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(results);
+      res.json(results)
+    });
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p><h3> accessTrip </h3> 
+Returns a trip object with name, destination, and actitivites properties
+Acitivties is an array
+Method: Get
+Route : /trips/*</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  accessTrip: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
+    <span class="hljs-keyword">var</span> tripId = req.params.id;
+    <span class="hljs-keyword">var</span> fullActivities = {};
+    fullActivities.list = [];
+    Trips.findById({ _id: tripId }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, trip</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) { 
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"findById error"</span>, err)
+        <span class="hljs-keyword">return</span> err; 
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"FindbyID Results"</span>, trip);
+        <span class="hljs-keyword">return</span> trip;
+      }
+    })
+    .then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">trip</span>)</span>{
+      fullActivities.name = trip.name;
+      fullActivities.destination = trip.destination;
+      <span class="hljs-keyword">var</span> activityLength = trip.activities.length;
+      trip.activities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">tripId</span>)</span>{
+        TripItems.findById({ _id: tripId }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, trip</span>) </span>{
+          <span class="hljs-keyword">if</span> (err) {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Error finding TripItems by tripId"</span>, err)
+          } <span class="hljs-keyword">else</span> {
+            fullActivities.list.push(trip);
+            <span class="hljs-keyword">if</span>(activityLength === fullActivities.list.length){
+              res.send(fullActivities);
+            } 
+          }
+        });
+      });
+    });
+  }
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
