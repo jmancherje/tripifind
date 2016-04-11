@@ -6,17 +6,6 @@ angular.module('app.trip', ['app.services'])
 
   // $scope.id stores the trip mongoose _.id
   $scope.id = $routeParams.id;
-  var initMap = function() {
-    var div = document.getElementById('map');
-      if (!div) {
-        return
-      } else {
-        map = new google.maps.Map(div, {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-  }
 
   // ActivitiesData.getTripActivities returns and object containing
   // the details for each activity stored in this trip
@@ -29,10 +18,5 @@ angular.module('app.trip', ['app.services'])
     $scope.name = tripObj.data.name;
     $scope.destination = tripObj.data.destination;
   });
-
-  $http.get('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2d3ZacGZmT2LPp401fbm4kzPIGUUGvSM&callback=initMap')
-    .success(function() {
-      console.log('success getting map')
-    })
 
 })
