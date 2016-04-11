@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/#landing">Tripify</a>
+      <a class="navbar-brand" href="/#landing">Tripifind</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +34,7 @@
     <li class="foursquare-li li-add" ng-repeat="activity in activities">
       <div class="row">
           <div class="col-xs-4">
-            <img class="addActivityImage" src="{{activity.photo}}" alt="{{activity.name}} in {{activity.address.split(',')[1]}}">
+            <img class="addActivityImage" ng-src="{{activity.photo}}" alt="{{activity.name}} in {{activity.address.split(',')[1]}}">
           </div>
           <div class="col-xs-6">
             <p><strong>{{activity.name}}</strong></p>

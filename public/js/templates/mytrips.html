@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/#landing">Tripify</a>
+      <a class="navbar-brand" href="/#landing">Tripifind</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,10 +27,10 @@
 <!-- Content -->
   <h1 class="page-title">Playlists</h1>
   <input type="text" ng-model="filter.destination" id="landing-filter" placeholder="Search By City">
-  <div class="myTrips" style="background-color: white">
+  <div class="col-lg-10 col-lg-offset-1">
     <span class="playlist" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
       <div class="playlist-img">
-        <img class="trip-img" src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
+        <img class="trip-img" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
       </div>
       <div class="playlist-info">
         <p class="glyphicon glyphicon-play-circle play-icon"></p>
