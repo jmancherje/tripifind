@@ -21,7 +21,11 @@ var filterTripData = function(responseObj) {
       category: item.venue.categories[0].name,
       rating: item.venue.rating,
       photo: photoURL.prefix + '300x300' + photoURL.suffix,
-      url: item.venue.url
+      url: item.venue.url,
+      coordinates: {
+        longitude: location.lng,
+        latitude: location.lat
+      }
     };
     totalData.push(tripItem); 
     return totalData;
@@ -59,7 +63,6 @@ module.exports = {
 
   searchStoredData: function(req, res, next) {
     var city = parseCityName(decodeURI(req.url.split('/')[2]));
-    console.log(city);
     TripItems.find({ city: city }, function(err, list) {
       if (list.length < 1) {
         // if (list.length < 1) {
@@ -83,8 +86,9 @@ module.exports = {
   // Method: GET
   // Route : /activities/*'
   fetchCityData: function(req, res, next) {
+    console.log('cityState: ', req.url);
     var cityState = req.url.split('/')[2];
-    return request('https://api.foursquare.com/v2/venues/explore?client_id='+FOURSQUARE_API+'&client_secret='+FOURSQUARE_SECRET+'&v=20130815&near='+cityState+'&venuePhotos=1', function(err, response, body) {
+    return request('https://api.foursquare.com/v2/venues/explore?client_id='+FOURSQUARE_APIKEY+'&client_secret='+FOURSQUARE_SECRET+'&v=20130815&near='+cityState+'&venuePhotos=1', function(err, response, body) {
       // prevent server crashing when responseObj is undefined
       if (!err && JSON.parse(body).meta.code === 200) { 
         var filteredResults = filterTripData(JSON.parse(body).response.groups[0].items);
@@ -92,7 +96,7 @@ module.exports = {
           if (err) {
             res.send(err);
           }
-        res.send(JSON.stringify(results));
+          res.send(JSON.stringify(results));
         });
       } else {
         res.status(400).send(err);

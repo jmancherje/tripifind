@@ -8,7 +8,7 @@ module.exports = function(app, express) {
   app.post('/api/login', userController.login);
   app.post('/api/signup', userController.signup);
   app.get('/logout', userController.logout);
-  app.get('/activities/*', controller.searchStoredData, controller.fetchCityData);
+  app.get('/activities/*', controller.fetchCityData);
   app.post('/trips', controller.createTrip);
   app.get('/trips/:id', controller.accessTrip);
   app.get('/trips', controller.getAllTrips);
