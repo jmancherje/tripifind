@@ -29,7 +29,7 @@
   <h2 class="page-title">{{name}}</h2>
   <h4 class="page-title">{{destination[0]}}, {{destination[1]}}</h4>
 
-<div class="tripview-container">
+<div class="tripview-container col-md-4">
   <ul ui-sortable ng-model="activities">
     <li class="foursquare-li li-add" ng-repeat="activity in activities">
       <div class="row">
@@ -54,3 +54,4 @@
   </ul>
 </div>
 
+<div class="col-md-8" id="map" style="height: 500px"></div>
