@@ -7,7 +7,7 @@
 // app.mytrips loads myTrips controller
 // ngRoute is for angular routing
 var myAppModule = angular.module('MyApp', ['ui.sortable'])
-angular.module('app', ['app.auth', 'app.trip', 'app.landing', 'app.create', 'app.services', 'app.mytrips', 'ui.sortable', 'ngRoute'])
+angular.module('app', ['app.auth', 'app.trip', 'app.landing', 'app.create', 'app.services', 'app.mytrips', 'ui.sortable', 'uiGmapgoogle-maps', 'ngRoute'])
 
 
 .config(function ($routeProvider) {

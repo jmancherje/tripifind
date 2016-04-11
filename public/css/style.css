@@ -12,7 +12,9 @@ body {
 
 }
 
-
+.angular-google-map-container { 
+  height: 50vh;
+}
 h1 {
   margin-top: 0;
 }
@@ -137,7 +139,6 @@ div.playlist-img {
   width: 150px;
 }
 .tripview-container {
-  width: 600px;
   margin: 0 auto;
 }
 

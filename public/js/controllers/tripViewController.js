@@ -6,7 +6,7 @@ angular.module('app.trip', ['app.services'])
 
   // $scope.id stores the trip mongoose _.id
   $scope.id = $routeParams.id;
-
+  $scope.map = { center: { latitude: 37.7749, longitude: -122.4192 }, zoom: 14 };
   // ActivitiesData.getTripActivities returns and object containing
   // the details for each activity stored in this trip
   // $scope.activities stores an array of all activities
