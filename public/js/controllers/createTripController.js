@@ -23,7 +23,7 @@ angular.module('app.create', ['app.services'])
       // $scope.formCompleted set to true removes the form and begins populating 
       // the rest of the page.
       $scope.formCompleted = true;
-      $http.get('/activities/' + $scope.city + ',' + $scope.state)
+      $http.get('/api/activities/' + $scope.city + ',' + $scope.state)
         .success(function (data) {
           // $scope.activities is an array of all the activities found by the api
           // at the given destination

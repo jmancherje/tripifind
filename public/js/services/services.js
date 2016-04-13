@@ -21,7 +21,7 @@ angular.module('app.services',[])
       return data.cityCache[city]
     }
     //call get request to our server, with the city
-    return $http.get('/activities/' + city)
+    return $http.get('/api/activities/' + city)
     .then(function(results){
       //our server calls a get request to the foursquare api
       //posts it to our database
@@ -53,7 +53,7 @@ angular.module('app.services',[])
   // Function that retrieves all of one users stored trips
   // sends get request to /trips/`userId`
   data.getUsersTrips = function(userId, callback){
-    $http.get('/trips/' + userId)
+    $http.get('/api/trips/' + userId)
     .then(function(results){
       //our server calls a get request to the foursquare api
       //posts it to our database
@@ -70,7 +70,7 @@ angular.module('app.services',[])
   // pulls an trip from the db with the tripId
   // sends get request to /trips/`tripId`
   data.getIndividualTrip = function(tripId){
-    $http.get('/trips/' + tripId)
+    $http.get('/api/trips/' + tripId)
     .then(function(results){
       // server calls a get request to the foursquare api
       // posts it to our database
@@ -87,7 +87,7 @@ angular.module('app.services',[])
   // creates a trip and stores it to the db
   data.createTrip = function(tripData){
     //tripData is a JSON object
-    $http.post('/trips', tripData)
+    $http.post('/api/trips', tripData)
     .then(function(){
       console.log("Trip Created");
       $location.path('/myTrips');
@@ -101,7 +101,7 @@ angular.module('app.services',[])
   // retrieves an object containing all activities and data related
   // to the trip id
   data.getTripActivities = function(id, cb){
-   return $http.get('/trips/' + id)
+   return $http.get('/api/trips/' + id)
    .then(function(results){
     console.log('trip data: ', results)
      //our server calls a get request to the foursquare api
