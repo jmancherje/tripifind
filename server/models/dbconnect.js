@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// require('dotenv').config()
 
 mongoURI = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
 console.log('mongoURI: ', mongoURI);

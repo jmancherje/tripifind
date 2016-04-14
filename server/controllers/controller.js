@@ -86,8 +86,9 @@ module.exports = {
   // Method: GET
   // Route : /activities/*'
   fetchCityData: function(req, res, next) {
-    console.log('cityState: ', req.url);
-    var cityState = req.url.split('/')[2];
+    console.log('req.params: ', req.params);
+    var cityState = req.url;
+    console.log('cityState', cityState);
     return request('https://api.foursquare.com/v2/venues/explore?client_id='+FOURSQUARE_APIKEY+'&client_secret='+FOURSQUARE_SECRET+'&v=20130815&near='+cityState+'&venuePhotos=1', function(err, response, body) {
       // prevent server crashing when responseObj is undefined
       if (!err && JSON.parse(body).meta.code === 200) { 
@@ -148,6 +149,7 @@ module.exports = {
   // Method: Get
   // Route : /trips
   getAllTrips: function (req, res, next) {
+    console.log('getting all trips...')
     Trips.find(function (err, results) {
       console.log(results);
       res.json(results)

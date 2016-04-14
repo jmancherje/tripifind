@@ -21,7 +21,7 @@ angular.module('app.services',[])
       return data.cityCache[city]
     }
     //call get request to our server, with the city
-    return $http.get('/api/activities/' + city)
+    return $http.get('/api/activities?city=' + city)
     .then(function(results){
       //our server calls a get request to the foursquare api
       //posts it to our database
@@ -40,7 +40,7 @@ angular.module('app.services',[])
   // Function that sends a get request to /trips and retrieves
   // all trips from the db
   data.getTrips = function(){
-    return $http.get('/trips')
+    return $http.get('/api/trips')
     .then(function(results){
       return results;
     })
