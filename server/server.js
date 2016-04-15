@@ -1,18 +1,18 @@
-var express = require('express');
-var path = require('path');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-require('dotenv').config()
+const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+// const session = require('express-session');
+require('dotenv').config();
 
 const router = require('./routes');
-var app = express();
+const app = express();
 
-var port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(session({secret: '1234567890QWERTY'}));
+// app.use(session({secret: '1234567890QWERTY'}));
 
 app.use('/api', router);
 require('./models/dbroutes.js')(app, express);
