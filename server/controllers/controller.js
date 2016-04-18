@@ -7,7 +7,7 @@ var async = require('async');
 var FOURSQUARE_APIKEY = process.env.FOURSQUARE_API;
 var FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET;
 
-
+// put in helper
 var filterTripData = function(responseObj) {
   return responseObj.reduce(function(totalData, item) { 
     var location = item.venue.location;
@@ -33,7 +33,7 @@ var filterTripData = function(responseObj) {
 };
 
 
-
+// put in helper
 // <h4> parseCityName </h4>
 // Accepts the decoded request url, reformats it and 
 // returns a string of the city name 
@@ -86,19 +86,29 @@ module.exports = {
   // Method: GET
   // Route : /activities/*'
   fetchCityData: function(req, res, next) {
-    console.log('req.params: ', req.params);
-    var cityState = req.url;
-    console.log('cityState', cityState);
+    // if request is already cached, skip api call
+    console.log('fetching data for ', req.params.city)
+    if (req.cached === true) {
+      console.log('already cached..')
+      next();
+    }
+    // return;
+    var cityState = encodeURI(req.params.city.toLowerCase());
     return request('https://api.foursquare.com/v2/venues/explore?client_id='+FOURSQUARE_APIKEY+'&client_secret='+FOURSQUARE_SECRET+'&v=20130815&near='+cityState+'&venuePhotos=1', function(err, response, body) {
       // prevent server crashing when responseObj is undefined
       if (!err && JSON.parse(body).meta.code === 200) { 
-        var filteredResults = filterTripData(JSON.parse(body).response.groups[0].items);
-        module.exports.saveCityData(filteredResults).then(function(results, err) {
-          if (err) {
-            res.send(err);
-          }
-          res.send(JSON.stringify(results));
-        });
+        // attach filtered data to request object, send to redis
+        req.filteredData = filterTripData(JSON.parse(body).response.groups[0].items);
+        next();
+
+        // res.status(200).json(results)
+        // module.exports.saveCityData(filteredResults).then(function(results, err) {
+        //   if (err) {
+        //     res.send(err);
+        //   }
+        //   // res.send(JSON.stringify(results));
+        //   next();
+        // });
       } else {
         res.status(400).send(err);
       }
@@ -151,7 +161,6 @@ module.exports = {
   getAllTrips: function (req, res, next) {
     console.log('getting all trips...')
     Trips.find(function (err, results) {
-      console.log(results);
       res.json(results)
     });
   },
@@ -170,7 +179,6 @@ module.exports = {
         console.log("findById error", err)
         return err; 
       } else {
-        console.log("FindbyID Results", trip);
         return trip;
       }
     })

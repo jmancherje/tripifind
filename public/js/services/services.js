@@ -16,6 +16,7 @@ angular.module('app.services',[])
   // returns a promise
   data.getActivities = function(city){
     //checks if the city has been searched before
+    console.log('searching for city: ', city)
     if(data.searchedCity[city]){
       //sends a callback with the cache data
       return data.cityCache[city]

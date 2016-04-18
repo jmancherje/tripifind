@@ -15,7 +15,6 @@ module.exports = {
   signup : function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    console.log("req body",req.body)
     User.find({username: username}, function(err, success){
       if(err){
         console.log("hit err", err);
@@ -25,7 +24,6 @@ module.exports = {
     })
     .then(function(success){
       if(success.length !== 0){
-        console.log("sending back found user ", success)
         res.send(success)
       } else{
         User.create({username: username, password: password}, function(err, results){

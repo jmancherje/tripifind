@@ -25,9 +25,11 @@ angular.module('app.create', ['app.services'])
       $scope.formCompleted = true;
       $http.get('/api/activities/' + $scope.city + ',' + $scope.state)
         .success(function (data) {
+          console.log('typeof response: ', typeof data);
+          console.log('successful GET, data: ', data);
           // $scope.activities is an array of all the activities found by the api
           // at the given destination
-          $scope.activities = data;
+          $scope.activities = JSON.parse(data);
         });
     }
   };
