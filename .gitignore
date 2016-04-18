@@ -39,3 +39,6 @@ lib/
 
 ## API keys and Secrets
 server/env/config.js
+
+# cache
+*.rdb
