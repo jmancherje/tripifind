@@ -35,7 +35,7 @@
   sidebar
 </div> -->
 
-<div class="col-lg-10 col-lg-offset-1" >
+<div class="col-lg-10 col-lg-offset-1 playlist-grid" >
   <span class="playlist" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
     <div class="playlist-img">
       <img class="trip-img" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
@@ -46,4 +46,15 @@
       <p class="trip-destination trip-box-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
     </div>
   </span>
+  <!-- These extra spans are to fill the last row in the flexbox -->
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
+  <span class="playlist"></span>
 </div>

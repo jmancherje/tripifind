@@ -22,6 +22,15 @@ h1 {
   display: block;
   margin: 0 auto 10px auto;
 }
+.playlist-grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.playlist-grid:after {
+  content: "";
+  flex: auto;
+}
 .activitylist-left {
   height: 65vh;
   overflow: auto;
@@ -85,6 +94,10 @@ span.playlist {
   transition: color 0.6s ease;
   color: #333333;
   overflow: hidden;
+}
+span.playlist:empty {
+  height: 0;
+  border: none;
 }
 div.playlist-info {
   height: 65px;
