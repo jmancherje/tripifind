@@ -1,8 +1,51 @@
-<div>
-  <form ng-submit="LoginModalCtrl.submit(_email, _password)">
-    <input type="email" ng-model="_email" />
-    <input type="password" ng-model="_password" />
-    <button>Submit</button>
+<div ng-show="!!login">
+  <div class="modal-header">
+    <h3 class="modal-title">Login</h3>
+    
+  </div>
+  <form ng-submit="LoginModalCtrl.login(_email, _password)">
+    <div class="modal-body">
+        <fieldset class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="john@gmail.com" ng-model="_email">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="********" ng-model="_password">
+        </fieldset>
+        Not registered? <a ng-click="switchLogin()">sign up here</a>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Login</button>
+      <button class="btn btn-danger" ng-click="LoginModalCtrl.cancel()">Cancel</button>
+    </div>
   </form>
-  <button ng-click="LoginModalCtrl.cancel()">Cancel</button>
+</div>
+
+<div ng-show="!login">
+  <div class="modal-header">
+    <h3 class="modal-title">Sign up</h3>
+    
+  </div>
+  <form ng-submit="LoginModalCtrl.signup(_email, _password)">
+    <div class="modal-body">
+        <fieldset class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="john@gmail.com" ng-model="_emailSignUp">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="********" ng-model="_passwordSignUp">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" class="form-control" id="confirm-password" placeholder="********" ng-model="_confirmPasswordSignUp">
+        </fieldset>
+        Already registered? <a ng-click="switchLogin()">Login here</a>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Sign up</button>
+      <button class="btn btn-danger" ng-click="LoginModalCtrl.cancel()">Cancel</button>
+    </div>
+  </form>
 </div>

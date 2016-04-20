@@ -1,6 +1,6 @@
 angular.module('app.navbar', ['app.services'])
 
-.controller('NavbarController', function ($scope, LoginModal) {
+.controller('NavbarController', function ($scope, $state, LoginModal) {
   
   $scope.isLoggedIn = false;
   $scope.logout = function() {
@@ -10,7 +10,7 @@ angular.module('app.navbar', ['app.services'])
         return $state.go(toState.name, toParams);
       })
       .catch(function () {
-        return $state.go('welcome');
+        return $state.go('landing');
       });
     $scope.isLoggedIn = !$scope.isLoggedIn
   }

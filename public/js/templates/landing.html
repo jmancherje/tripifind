@@ -1,38 +1,12 @@
-<nav class="navbar navbar-full navbar-dark bg-inverse">
-
-  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#nav-content">
-  ☰
-  </button>
-
-  <div class="collapse navbar-toggleable-xs col-xl-10 col-xl-offset-1" id="nav-content">
-    <a class="navbar-brand" href="/#/">Tripifind</a>
-    <ul class="nav navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/#create">New Trip</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/#">Your Trips</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container-fluid col-xl-10 col-xl-offset-1">
+<div class="col-xl-10 col-xl-offset-1">
   <h2 class="list-title">Popular Trips:</h2>
-
   <div class="playlist-grid" >
     <div class="card card-inverse playlist-card" style="background-color: #333; border-color: #333;" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
       <img class="card-img-top" height="200px" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
       <div class="card-block">
-        <h4 class="card-title card-title">{{trip.name}}</h4>
+        <h4 class="card-title trip-name">{{trip.name}}</h4>
         <p class="card-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
       </div>
-
     </div>
   </div>
 </div>

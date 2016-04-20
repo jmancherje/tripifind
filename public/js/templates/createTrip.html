@@ -1,31 +1,6 @@
-<nav class="navbar navbar-full navbar-dark bg-inverse">
 
-  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#nav-content">
-  ☰
-  </button>
-
-  <div class="collapse navbar-toggleable-xs col-xl-10 col-xl-offset-1" id="nav-content">
-    <a class="navbar-brand" href="/#/">Tripifind</a>
-    <ul class="nav navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/#create">New Trip</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/#">Your Trips</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<!-- content -->
-
-<!-- Start Itinerary Form -->
-<div ng-show="!formCompleted" class="col-md-6 col-md-offset-3">
+<!-- Start Trip Form -->
+<div ng-show="!formCompleted" class="col-md-10 col-lg-8 col-xl-6 col-md-offset-1 col-lg-offset-2 col-xl-offset-3">
   <section class="ShowForm">
   <h4>Begin Your Trip</h4>
     <form ng-submit="startItinerary()">
@@ -47,8 +22,8 @@
 </div>
 
 
-<div class="container-fluid col-xl-10 col-xl-offset-1" ng-show="!!formCompleted">
-  <section class="col-sm-4 col-lg-2 left-column">
+<div ng-show="!!formCompleted">
+  <section class="col-sm-6 col-lg-4 col-xl-3 left-column">
     <h4>Make Your Trip</h4>
 
 
@@ -57,23 +32,30 @@
       <h2>{{itineraryName}}</h2>
       <h4>{{city}}, {{state}}</h4>
       <div class="activitylist-left">
-        <ul>
-          <li class="foursquare-li li-remove" ng-repeat="activity in itinerary track by $index">
+        <div ng-repeat="activity in itinerary track by $index" class="card card-inverse" style="background-color: #333; border-color: #333;">
+          <div class="card-block">
+            <h3 class="card-title">{{activity.name}}</h3>
+            <p class="card-text">{{activity.address.split(',')[0]}}</p>
+            <a ng-click="removeFromTrip()" class="btn btn-danger">Remove</a>
+          </div>
+        </div>
+
+
+          <!-- <li class="foursquare-li li-remove" ng-repeat="activity in itinerary track by $index">
             <div class="row">
               <p><strong>{{activity.name}}</strong></p>
               <p>{{activity.address.split(',')[0]}}</p>
               <p>{{activity.category}}</p>
               <span id="remove-button" class="glyphicon glyphicon-remove" ng-click="removeFromTrip()"></span>
             </div>
-          </li>
-        </ul>
+          </li> -->
       </div>
       <button class="btn btn-primary" ng-click="saveItinerary()">Save Your Itinerary!</button>
     </section>
   </section>
 
   <!-- list of activities from API -->
-  <section ng-show="formCompleted" class="selection-list col-sm-8 col-lg-10 text-center right-column">
+  <section ng-show="formCompleted" class="selection-list col-sm-6 col-lg-8 col-xl-9 text-center right-column">
     <h4>Activities</h4>
       <section class="activity-grid">
 
