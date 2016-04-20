@@ -23,31 +23,37 @@
 </nav>
 
 <!-- content -->
-<div class="container-fluid col-xl-10 col-xl-offset-1">
-  <section class="col-sm-4 col-lg-2 text-center left-column">
+
+<!-- Start Itinerary Form -->
+<div ng-show="!formCompleted" class="col-md-6 col-md-offset-3">
+  <section class="ShowForm">
+  <h4>Begin Your Trip</h4>
+    <form ng-submit="startItinerary()">
+      <fieldset class="form-group">
+        <label for="trip-name">Trip Name</label>
+        <input ng-model="itineraryName" type="text" class="form-control" id="trip-name" placeholder="Birthday Bonanza">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="trip-city">City</label>
+        <input ng-model="city" type="text" class="form-control" id="trip-city" placeholder="San Francisco">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="trip-state">State</label>
+        <input ng-model="state" type="text" class="form-control" id="trip-state" placeholder="CA">
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Start Making Trip</button>
+    </form>
+  </section>
+</div>
+
+
+<div class="container-fluid col-xl-10 col-xl-offset-1" ng-show="!!formCompleted">
+  <section class="col-sm-4 col-lg-2 left-column">
     <h4>Make Your Trip</h4>
 
-    <!-- Start Itinerary Form -->
-    <section class="ShowForm" ng-show="!formCompleted">
-      <form ng-submit="startItinerary()">
-        <fieldset class="form-group">
-          <label for="trip-name">Trip Name</label>
-          <input ng-model="itineraryName" type="text" class="form-control" id="trip-name" placeholder="Birthday Bonanza">
-        </fieldset>
-        <fieldset class="form-group">
-          <label for="trip-city">City</label>
-          <input ng-model="city" type="text" class="form-control" id="trip-city" placeholder="San Francisco">
-        </fieldset>
-        <fieldset class="form-group">
-          <label for="trip-state">State</label>
-          <input ng-model="state" type="text" class="form-control" id="trip-state" placeholder="CA">
-        </fieldset>
-        <button type="submit" class="btn btn-primary">Start Making Trip</button>
-      </form>
-    </section>
 
     <!-- creating itinerary list -->
-    <section class="itineraryDetails" ng-show="!!formCompleted">
+    <section class="itineraryDetails">
       <h2>{{itineraryName}}</h2>
       <h4>{{city}}, {{state}}</h4>
       <div class="activitylist-left">
@@ -67,12 +73,11 @@
   </section>
 
   <!-- list of activities from API -->
-  <section class="selection-list col-sm-8 col-lg-10 text-center right-column">
+  <section ng-show="formCompleted" class="selection-list col-sm-8 col-lg-10 text-center right-column">
     <h4>Activities</h4>
-      <section ng-show="formCompleted" class="activity-grid">
+      <section class="activity-grid">
 
-
-        <div class="card activity-card card-inverse" style="background-color: #333; border-color: #333; width: 200px" ng-repeat="activity in activities | orderBy:'-rating'">
+        <div class="card activity-card card-inverse" style="background-color: #333; border-color: #333; width: 200px; position: relative" ng-repeat="activity in activities | orderBy:'-rating'">
           <div class="card-block">
             <h4 class="card-title">{{activity.name}}</h4>
             <h6 class="card-subtitle text-muted">{{activity.category}}</h6>
@@ -80,7 +85,8 @@
           <img ng-src="{{activity.photo}}" height="200px" alt="image of {{activity.name}}">
           <div class="card-block">
             <a href="{{activity.url}}" class="card-link">Website</a>
-            <button class="btn btn-primary" ng-click="addToTrip()">Add</button>
+            <a href="#" class="card-link">Foursquare</a>
+            <button class="btn btn-primary button-bottom" ng-click="addToTrip()">Add</button>
           </div>
         </div>
 

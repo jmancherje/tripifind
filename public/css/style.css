@@ -12,6 +12,10 @@ body {
 
 }
 
+.button-bottom {
+  width: 100%;
+}
+
 .navbar {
   margin-bottom: 10px;
 }
