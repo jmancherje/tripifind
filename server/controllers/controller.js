@@ -20,7 +20,7 @@ var filterTripData = function(responseObj) {
       notes: notes,
       category: item.venue.categories[0].name,
       rating: item.venue.rating,
-      photo: photoURL.prefix + '300x300' + photoURL.suffix,
+      photo: photoURL.prefix + '100x100' + photoURL.suffix,
       url: item.venue.url,
       coordinates: {
         longitude: location.lng,

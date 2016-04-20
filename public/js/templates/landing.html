@@ -1,60 +1,38 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/#landing">Tripifind</a>
-    </div>
+<nav class="navbar navbar-full navbar-dark bg-inverse">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/#create">Create A Trip</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#nav-content">
+  ☰
+  </button>
+
+  <div class="collapse navbar-toggleable-xs col-xl-10 col-xl-offset-1" id="nav-content">
+    <a class="navbar-brand" href="/#">Tripifind</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/#create">New Trip</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/#">Your Trips</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav pull-xs-right">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-<h2 class="text-center">Tripifind</h2>
-<a href="/#create" class="text-center" style="display: block">Make a Playlist</a>
+<div class="container-fluid col-xl-10 col-xl-offset-1">
+  <h2 class="list-title">Popular Trips:</h2>
 
-<h1 class="page-title">Popular Trips:</h1>
+  <div class="playlist-grid" >
+    <div class="card card-inverse playlist-card" style="background-color: #333; border-color: #333; width: 200px" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
+      <img class="card-img-top" height="200px" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
+      <div class="card-block">
+        <h4 class="card-title card-title">{{trip.name}}</h4>
+        <p class="card-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
+      </div>
 
-<input type="text" ng-model="filter.destination" id="landing-filter" placeholder="Search By City">
-
-<!-- <div class="col-sm-2">
-  sidebar
-</div> -->
-
-<div class="col-lg-10 col-lg-offset-1 playlist-grid" >
-  <span class="playlist" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
-    <div class="playlist-img">
-      <img class="trip-img" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
     </div>
-    <div class="playlist-info">
-      <p class="glyphicon glyphicon-play-circle play-icon"></p>
-      <p class="trip-name trip-box-text">{{trip.name}}</p>
-      <p class="trip-destination trip-box-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
-    </div>
-  </span>
-  <!-- These extra spans are to fill the last row in the flexbox -->
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
-  <span class="playlist"></span>
+  </div>
 </div>

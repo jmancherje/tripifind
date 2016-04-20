@@ -11,7 +11,9 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
 
 }
-
+.playlist-card {
+  overflow: hidden;
+}
 .angular-google-map-container { 
   height: 50vh;
 }
@@ -22,14 +24,45 @@ h1 {
   display: block;
   margin: 0 auto 10px auto;
 }
+
+.card-block {
+  padding: 0.25rem;
+}
+
+
+.hover-button {
+  z-index: 10;
+}
+
 .playlist-grid {
   display: flex;
-  flex-flow: row wrap;
+  /*flex-flow: row wrap;*/
+  flex-wrap: wrap;
   justify-content: space-between;
 }
-.playlist-grid:after {
-  content: "";
-  flex: auto;
+
+.playlist-card {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.playlist-card:hover {
+  -webkit-filter: brightness(50%);
+}
+
+@media (max-width: 675px) {
+  .playlist-grid {
+    justify-content: center;
+  }
+
+  .playlist-card {
+    margin: 3px;
+  }
+}
+
+.playlist-card:empty {
+  height: 0;
+  border: none;
 }
 .activitylist-left {
   height: 65vh;
