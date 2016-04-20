@@ -1,64 +1,53 @@
-<!-- navigation -->
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/#landing">Tripifind</a>
-    </div>
+<nav class="navbar navbar-full navbar-dark bg-inverse">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/#myTrips">My Trips</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#nav-content">
+  ☰
+  </button>
+
+  <div class="collapse navbar-toggleable-xs col-xl-10 col-xl-offset-1" id="nav-content">
+    <a class="navbar-brand" href="/#/">Tripifind</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/#create">New Trip</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/#">Your Trips</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav pull-xs-right">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 
 <!-- content -->
-<div class="creation-container">
-  <div class="col-xs-6 text-center left-column">
-    <h4>Make Your Playlist</h4>
+<div class="container-fluid col-xl-10 col-xl-offset-1">
+  <section class="col-sm-4 col-lg-2 text-center left-column">
+    <h4>Make Your Trip</h4>
 
-    <div class="ShowForm" ng-show="!formCompleted">
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Playlist Name:</label>
-          <div class="col-sm-10">
-            <input maxlength="30" type="text" class="form-control" placeholder="Birthday Bonanza" ng-model="itineraryName">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">City</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputPassword3" placeholder="San Francisco" ng-model="city">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">State</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputPassword3" placeholder="CA" ng-model="state">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button ng-click="startItinerary()" type="submit" class="btn btn-success">Start Itinerary</button>
-          </div>
-        </div>
+    <!-- Start Itinerary Form -->
+    <section class="ShowForm" ng-show="!formCompleted">
+      <form ng-submit="startItinerary()">
+        <fieldset class="form-group">
+          <label for="trip-name">Trip Name</label>
+          <input ng-model="itineraryName" type="text" class="form-control" id="trip-name" placeholder="Birthday Bonanza">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="trip-city">City</label>
+          <input ng-model="city" type="text" class="form-control" id="trip-city" placeholder="San Francisco">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="trip-state">State</label>
+          <input ng-model="state" type="text" class="form-control" id="trip-state" placeholder="CA">
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Start Making Trip</button>
       </form>
-    </div>
+    </section>
 
-    <div class="itineraryDetails" ng-show="!!formCompleted">
-
+    <!-- creating itinerary list -->
+    <section class="itineraryDetails" ng-show="!!formCompleted">
       <h2>{{itineraryName}}</h2>
       <h4>{{city}}, {{state}}</h4>
       <div class="activitylist-left">
@@ -69,39 +58,32 @@
               <p>{{activity.address.split(',')[0]}}</p>
               <p>{{activity.category}}</p>
               <span id="remove-button" class="glyphicon glyphicon-remove" ng-click="removeFromTrip()"></span>
-              <!-- <button id="remove-button" class="btn btn-danger glyphicon glyphicon-remove" ng-click="removeFromTrip()"></button> -->
             </div>
           </li>
         </ul>
       </div>
-        <button class="btn btn-success" ng-click="saveItinerary()">Save Your Itinerary!</button>
-    </div>
+      <button class="btn btn-primary" ng-click="saveItinerary()">Save Your Itinerary!</button>
+    </section>
+  </section>
 
-<!--     <div class="itineraryItems" ng-show="!!formCompleted">
-      <div ng-repeat="activity in itinerary track by $index">
-        {{ item.name }}
-      </div>
-      <button class="btn btn-success" ng-click="saveItinerary()">Save Your Itinerary!</button>
-    </div> -->
-
-
-  </div>
-  <div class="selection-list col-xs-6 text-center right-column">
+  <!-- list of activities from API -->
+  <section class="selection-list col-sm-8 col-lg-10 text-center right-column">
     <h4>Activities</h4>
-    <div class="activitylist-right">
-      <ul ng-show="formCompleted">
-        <li class="foursquare-li li-add" ng-repeat="activity in activities | orderBy:'-rating'">
-          <div class="row" ng-click="addToTrip()">
-              <img class="addActivityImage" ng-src="{{activity.photo}}" alt="">
-              <p><strong>{{activity.name}}</strong></p>
-              <p>{{activity.address.split(',')[0]}}</p>
-              <p>{{activity.category}}</p>
-              <p>{{activity.rating}}/10</p>
-              <a href="{{activity.url}}" target="_blank">Website</a>
-              <!-- <button class="btn btn-success" ng-click="addToTrip()">Add</button> -->
+      <section ng-show="formCompleted" class="activity-grid">
+
+
+        <div class="card activity-card card-inverse" style="background-color: #333; border-color: #333; width: 200px" ng-repeat="activity in activities | orderBy:'-rating'">
+          <div class="card-block">
+            <h4 class="card-title">{{activity.name}}</h4>
+            <h6 class="card-subtitle text-muted">{{activity.category}}</h6>
           </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+          <img ng-src="{{activity.photo}}" height="200px" alt="image of {{activity.name}}">
+          <div class="card-block">
+            <a href="{{activity.url}}" class="card-link">Website</a>
+            <button class="btn btn-primary" ng-click="addToTrip()">Add</button>
+          </div>
+        </div>
+
+      </section>
+  </section>
 </div>

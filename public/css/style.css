@@ -11,6 +11,10 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
 
 }
+
+.navbar {
+  margin-bottom: 10px;
+}
 .playlist-card {
   overflow: hidden;
 }
@@ -29,21 +33,30 @@ h1 {
   padding: 0.25rem;
 }
 
-
 .hover-button {
   z-index: 10;
 }
 
 .playlist-grid {
   display: flex;
-  /*flex-flow: row wrap;*/
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.activity-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.activity-card {
+  margin: 3px;
 }
 
 .playlist-card {
   margin: 5px;
   cursor: pointer;
+  width: 200px;
 }
 
 .playlist-card:hover {
