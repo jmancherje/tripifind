@@ -12,6 +12,10 @@ body {
 
 }
 
+.trip-name {
+  font-size: 1.1rem;
+}
+
 .button-bottom {
   width: 100%;
 }
@@ -27,10 +31,6 @@ body {
 }
 h1 {
   margin-top: 0;
-}
-#landing-filter {
-  display: block;
-  margin: 0 auto 10px auto;
 }
 
 .card-block {

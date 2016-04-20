@@ -6,45 +6,57 @@
 // app.services loads all factory/service functionality
 // app.mytrips loads myTrips controller
 // ngRoute is for angular routing
-var myAppModule = angular.module('MyApp', ['ui.sortable'])
-angular.module('app', ['app.auth', 'app.trip', 'app.landing', 'app.create', 'app.services', 'app.mytrips', 'ui.sortable', 'uiGmapgoogle-maps', 'ngRoute'])
+// var tripApp = angular.module('tripApp', ['ui.sortable', 'ui.router'])
+var app = angular.module('app', ['app.auth', 'app.trip', 'app.landing', 'app.create', 'app.navbar', 'app.login', 'app.services', 'app.mytrips', 'ui.sortable', 'uiGmapgoogle-maps', 'ui.router', 'ngTouch', 'ui.bootstrap'])
 
+app.config(function ($stateProvider, $urlRouterProvider) {
+  
+  $urlRouterProvider.otherwise('/')
 
-.config(function ($routeProvider) {
-  $routeProvider
-    // landing page
-    .when('/', {
+  $stateProvider
+    
+    .state('landing', {
+      url: '/',
       templateUrl: './js/templates/landing.html',
       controller: 'LandingController'
     })
-    // login page
-    .when('/login', {
-      templateUrl: './js/templates/login.html',
-      controller: 'AuthController'
-    })
-    // signup page
-    .when('/signup', {
-      templateUrl: './js/templates/signup.html',
-      controller: 'AuthController'
-    })
-    // trip creation page
-    .when('/create', {
+
+    .state('createTrip', {
+      url: '/create',
       templateUrl: './js/templates/createTrip.html',
       controller: 'CreateTripController'
     })
-    // myTrips page
-    .when('/myTrips', {
+
+    .state('myTrips', {
+      url: '/mytrips',
       templateUrl: './js/templates/mytrips.html',
       controller: 'MyTripsController'
     })
-    // splash page
-    .when('/splash', {
-      templateUrl: './js/templates/splash.html',
-    })
-    // single trip page
-    .when('/trip/:id', {
+
+    .state('trip', {
+      url: '/trip/:id',
       templateUrl: './js/templates/tripView.html',
       controller: 'TripController'
     })
-    .otherwise('/');
+
 });
+
+// app.run(function ($rootScope, $state, LoginModal) {
+
+//   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+//     var requireLogin = toState.data.requireLogin;
+
+//     if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+//       event.preventDefault();
+
+//       LoginModal()
+//         .then(function () {
+//           return $state.go(toState.name, toParams);
+//         })
+//         .catch(function () {
+//           return $state.go('welcome');
+//         });
+//     }
+//   });
+
+// });
