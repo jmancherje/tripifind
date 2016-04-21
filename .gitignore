@@ -42,3 +42,5 @@ server/env/config.js
 
 # cache
 *.rdb
+
+*.env

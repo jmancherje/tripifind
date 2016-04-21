@@ -2,14 +2,17 @@
 var Trips = require('../models/trips.js');
 var TripItems = require('../models/tripItem.js');
 var request = require('request');
-var async = require('async');
 
 var FOURSQUARE_APIKEY = process.env.FOURSQUARE_API;
 var FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET;
 
 // put in helper
 var filterTripData = function(responseObj) {
-  return responseObj.reduce(function(totalData, item) { 
+  var cityData = {};
+  var activitiesRaw = responseObj.groups[0].items;
+  cityData.location = responseObj.suggestedBounds;
+  cityData.location.center = responseObj.geocode.center;
+  cityData.activities = activitiesRaw.reduce(function(totalData, item) {
     var location = item.venue.location;
     var photoURL = item.venue.featuredPhotos.items[0];
     var notes = item.tips === undefined ? '' : item.tips[0].text; 
@@ -20,16 +23,24 @@ var filterTripData = function(responseObj) {
       notes: notes,
       category: item.venue.categories[0].name,
       rating: item.venue.rating,
-      photo: photoURL.prefix + '100x100' + photoURL.suffix,
+      photo: photoURL.prefix + '300x300' + photoURL.suffix,
       url: item.venue.url,
-      coordinates: {
+      api: {
+        name: 'foursquare',
+        id: item.venue.id,
+        website: 'https://foursquare.com/venue/' + item.venue.id
+      },
+      location: {
         longitude: location.lng,
-        latitude: location.lat
+        latitude: location.lat,
+        formattedAddress: location.formattedAddress
       }
     };
     totalData.push(tripItem); 
     return totalData;
   }, []);
+  console.log('fetched and filtered city data: ', cityData);
+  return cityData;
 };
 
 
@@ -98,7 +109,7 @@ module.exports = {
       // prevent server crashing when responseObj is undefined
       if (!err && JSON.parse(body).meta.code === 200) { 
         // attach filtered data to request object, send to redis
-        req.filteredData = filterTripData(JSON.parse(body).response.groups[0].items);
+        req.filteredData = filterTripData(JSON.parse(body).response);
         next();
 
         // res.status(200).json(results)
@@ -179,6 +190,7 @@ module.exports = {
         console.log("findById error", err)
         return err; 
       } else {
+        fullActivities.trip = trip;
         return trip;
       }
     })
@@ -193,7 +205,7 @@ module.exports = {
           } else {
             fullActivities.list.push(trip);
             if(activityLength === fullActivities.list.length){
-              res.send(fullActivities);
+              res.status(200).send(fullActivities);
             } 
           }
         });

@@ -12,11 +12,29 @@ angular.module('app.trip', ['app.services'])
   // $scope.activities stores an array of all activities
   // $scope.name stores the name of the trip/playlist
   // $scope.destination stores the destionation of the trip
+  $scope.refreshMap = false;
   ActivitiesData.getTripActivities($scope.id, function (tripObj) {
+    $scope.dataLoaded = true;
     console.log('tripobj ', tripObj);
     $scope.activities = tripObj.data.list;
     $scope.name = tripObj.data.name;
     $scope.destination = tripObj.data.destination;
+    $scope.map = { bounds: { 
+        southwest: {
+          latitude: tripObj.data.trip.location.sw.lat,
+          longitude: tripObj.data.trip.location.sw.lng
+        },
+        northeast: {
+          latitude: tripObj.data.trip.location.ne.lat,
+          longitude: tripObj.data.trip.location.ne.lng
+        }
+      },
+      center: {
+        latitude: tripObj.data.trip.location.center.lat,
+        longitude: tripObj.data.trip.location.center.lng
+      }
+    }
+    $scope.refreshMap = true;
   });
 
 })

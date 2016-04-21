@@ -4,7 +4,7 @@ angular.module('app.services',[])
 
 // Include ActivitiesData in controller paramters to access these factory
 // functions
-.factory('ActivitiesData', function($http, $location){
+.factory('ActivitiesData', function($http, $location, $state){
   // data stores all of the service functions
   var data = {};
   data.searchedCity = {};
@@ -87,11 +87,13 @@ angular.module('app.services',[])
   // <h4>data.createTrip</h4>
   // creates a trip and stores it to the db
   data.createTrip = function(tripData){
+    console.log('tripData ', tripData);
+    // return;
     //tripData is a JSON object
     $http.post('/api/trips', tripData)
-    .then(function(){
+    .then(function(res){
       console.log("Trip Created");
-      $location.path('/myTrips');
+      $state.go('trip', { id: res.data._id })
     })
     .catch(function(err){
       console.log("Error Creating Trip: ", err);

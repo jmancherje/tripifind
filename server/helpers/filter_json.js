@@ -3,7 +3,7 @@
 
 module.exports = {
   filterTripData: function(responseObj) {
-    return responseObj.reduce(function(totalData, item) { 
+    return responseObj.reduce(function(totalData, item) {
       var location = item.venue.location;
       var photoURL = item.venue.featuredPhotos.items[0];
       var notes = item.tips === undefined ? '' : item.tips[0].text; 
@@ -14,11 +14,17 @@ module.exports = {
         notes: notes,
         category: item.venue.categories[0].name,
         rating: item.venue.rating,
-        photo: photoURL.prefix + '100x100' + photoURL.suffix,
+        photo: photoURL.prefix + '300x300' + photoURL.suffix,
         url: item.venue.url,
-        coordinates: {
+        api: {
+          name: 'foursquare',
+          id: item.venue.id,
+          website: 'https://foursquare.com/venue/' + item.venue.id
+        },
+        location: {
           longitude: location.lng,
-          latitude: location.lat
+          latitude: location.lat,
+          formattedAddress: location.formattedAddress
         }
       };
       totalData.push(tripItem); 

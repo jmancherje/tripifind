@@ -9,6 +9,7 @@ angular.module('app.create', ['app.services'])
   // if it's false, the form with show
   // if true, the form will hide and the right side of page will populate
   $scope.formCompleted = false;
+  $scope.cityLocation = {};
   
   // <h3>startItinerary is a function to: </h3>
     // 1. hide the form
@@ -25,11 +26,12 @@ angular.module('app.create', ['app.services'])
       $scope.formCompleted = true;
       $http.get('/api/activities/' + $scope.city + ',' + $scope.state)
         .success(function (data) {
-          console.log('typeof response: ', typeof data);
-          console.log('successful GET, data: ', data);
+          console.log('successful GET, data: ', JSON.parse(data));
           // $scope.activities is an array of all the activities found by the api
           // at the given destination
-          $scope.activities = JSON.parse(data);
+          var cityInfo = JSON.parse(data);
+          $scope.activities = cityInfo.activities;
+          $scope.cityLocation = cityInfo.location
         });
     }
   };
@@ -61,17 +63,15 @@ angular.module('app.create', ['app.services'])
   // see the documentation on services.js for more information.
   $scope.saveItinerary = function () {
     // POST request to /trips with $scope.itinerary 
-    var activityIds = $scope.itinerary.map(function (activity) {
-      return activity._id;
-    });
-    console.log("ACTIVITY:", activityIds);
     var tripObj = {
       name: $scope.itineraryName,
       city: $scope.city,
       state: $scope.state,
-      activities: activityIds,
-      image: $scope.itineraryImage
+      activities: $scope.itinerary,
+      image: $scope.itineraryImage,
+      location: $scope.cityLocation
     };
+    console.log('trip:', tripObj);
     var trip = JSON.stringify(tripObj);
     ActivitiesData.createTrip(trip);
   };

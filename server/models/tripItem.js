@@ -9,9 +9,15 @@ var tripsItemsSchema = mongoose.Schema({
   rating: String,
   photo: String,
   url: String,
-  coordinates: {
-    longitude: Number,
-    latitude: Number
+  api: {
+    name: String,
+    id: String,
+    website: String
+  },
+  location: {
+    lat: Number,
+    lng: Number,
+    formattedAddress: [String]
   }
 });
 
