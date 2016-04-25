@@ -7,7 +7,7 @@
 // app.mytrips loads myTrips controller
 // ngRoute is for angular routing
 // var tripApp = angular.module('tripApp', ['ui.sortable', 'ui.router'])
-var app = angular.module('app', ['app.auth', 'app.trip', 'app.landing', 'app.create', 'app.navbar', 'app.login', 'app.services', 'app.mytrips', 'ui.sortable', 'uiGmapgoogle-maps', 'ui.router', 'ngTouch', 'ui.bootstrap'])
+var app = angular.module('app', ['app.auth', 'app.trip', 'app.landing', 'app.create', 'app.navbar', 'app.login', 'app.services', 'app.mytrips', 'ui.sortable', 'uiGmapgoogle-maps', 'ui.router', 'ngTouch', 'ui.bootstrap', 'google.places'])
 
 app.config(function ($stateProvider, $urlRouterProvider) {
   

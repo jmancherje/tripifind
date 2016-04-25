@@ -10,21 +10,24 @@ angular.module('app.create', ['app.services'])
   // if true, the form will hide and the right side of page will populate
   $scope.formCompleted = false;
   $scope.cityLocation = {};
+  $scope.autoCompleteOptions = {
+    componentRestrictions: { country : 'USA' },
+    types: ['(cities)'] 
+  }
   
   // <h3>startItinerary is a function to: </h3>
     // 1. hide the form
     // 2. trigger the search
   $scope.startItinerary = function () {
-    console.log('start itinerary');
-    // this if block ensures that the Itinerary Name City and State are present 
-    // before submitting the form
-    if (!$scope.itineraryName || !$scope.city || !$scope.state) {
+    console.log('start itinerary', typeof $scope.places, $scope.places);
+    if (!$scope.places || !$scope.itineraryName) {
       return;
     } else {
       // $scope.formCompleted set to true removes the form and begins populating 
       // the rest of the page.
       $scope.formCompleted = true;
-      $http.get('/api/activities/' + $scope.city + ',' + $scope.state)
+      // $http.get('/api/activities/' + $scope.city + ',' + $scope.state)
+      $http.get('/api/activities/' + $scope.places)
         .success(function (data) {
           console.log('successful GET, data: ', JSON.parse(data));
           // $scope.activities is an array of all the activities found by the api
