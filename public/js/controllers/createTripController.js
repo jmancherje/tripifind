@@ -19,7 +19,6 @@ angular.module('app.create', ['app.services'])
     // 1. hide the form
     // 2. trigger the search
   $scope.startItinerary = function() {
-    console.log('start itinerary', typeof $scope.places, $scope.places);
     if (!$scope.places || !$scope.itineraryName) {
       return;
     } else {
@@ -28,17 +27,12 @@ angular.module('app.create', ['app.services'])
       } else {
         $scope.address = $scope.places
       }
-      console.log('typeof address: ', typeof $scope.address);
-      console.log('scope.address: ', encodeURI($scope.address))
       // $scope.formCompleted set to true removes the form and begins populating 
       // the rest of the page.
       $scope.formCompleted = true;
       // $http.get('/api/activities/' + $scope.city + ',' + $scope.state)
       $http.get('/api/activities/' + encodeURI($scope.address))
         .success(function (data) {
-          // console.log('successful GET, data: ', JSON.parse(data));
-          console.log('Typeof data: ', typeof data);
-          console.log('data: ', JSON.parse(data));
           // $scope.activities is an array of all the activities found by the api
           // at the given destination
           var cityData = JSON.parse(data);
