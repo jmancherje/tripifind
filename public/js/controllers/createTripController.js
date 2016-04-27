@@ -18,23 +18,32 @@ angular.module('app.create', ['app.services'])
   // <h3>startItinerary is a function to: </h3>
     // 1. hide the form
     // 2. trigger the search
-  $scope.startItinerary = function () {
+  $scope.startItinerary = function() {
     console.log('start itinerary', typeof $scope.places, $scope.places);
     if (!$scope.places || !$scope.itineraryName) {
       return;
     } else {
+      if (typeof $scope.places === 'object') {
+        $scope.address = $scope.places.formatted_address;
+      } else {
+        $scope.address = $scope.places
+      }
+      console.log('typeof address: ', typeof $scope.address);
+      console.log('scope.address: ', encodeURI($scope.address))
       // $scope.formCompleted set to true removes the form and begins populating 
       // the rest of the page.
       $scope.formCompleted = true;
       // $http.get('/api/activities/' + $scope.city + ',' + $scope.state)
-      $http.get('/api/activities/' + $scope.places)
+      $http.get('/api/activities/' + encodeURI($scope.address))
         .success(function (data) {
-          console.log('successful GET, data: ', JSON.parse(data));
+          // console.log('successful GET, data: ', JSON.parse(data));
+          console.log('Typeof data: ', typeof data);
+          console.log('data: ', JSON.parse(data));
           // $scope.activities is an array of all the activities found by the api
           // at the given destination
-          var cityInfo = JSON.parse(data);
-          $scope.activities = cityInfo.activities;
-          $scope.cityLocation = cityInfo.location
+          var cityData = JSON.parse(data);
+          $scope.location = cityData.location;
+          $scope.activities = cityData.activities;
         });
     }
   };
