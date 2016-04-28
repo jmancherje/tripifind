@@ -3,7 +3,7 @@ angular.module('app.navbar', ['app.services'])
 .controller('NavbarController', function ($scope, $state, LoginModal) {
   
   $scope.isLoggedIn = false;
-  $scope.logout = function() {
+  $scope.login = function() {
     console.log('logout')
     LoginModal()
       .then(function () {
