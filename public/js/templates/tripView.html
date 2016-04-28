@@ -5,8 +5,29 @@
 <h4 class="page-title">{{destination[0]}}, {{destination[1]}}</h4>
 
 <div class="tripview-container col-md-4">
-  <ul ui-sortable ng-model="activities">
-    <li class="foursquare-li li-add" ng-repeat="activity in activities">
+  <ol ui-sortable ng-model="activities">
+    <li ng-repeat="activity in activities track by $index" class="trip-numbered-item">
+      <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+        <div class="card-block">
+          <h3 class="card-title">{{activity.name}}</h3>
+          <p class="card-text">{{activity.address.split(',')[0]}}</p>
+          <p class="card-text">{{activity.category}}</p>
+          <a href="{{activity.url}}" target="_blank">Website</a>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<div class="col-md-8">
+  <ui-gmap-google-map center='map.center' refresh="refreshMap" zoom="map.zoom"></ui-gmap-google-map>
+</div>
+    
+
+
+
+
+    <!-- <li class="foursquare-li li-add" ng-repeat="activity in activities">
       <div class="row">
           <div class="col-xs-4">
             <img class="addActivityImage" ng-src="{{activity.photo}}" alt="{{activity.name}} in {{activity.address.split(',')[1]}}">
@@ -23,10 +44,4 @@
             <div class="vote glyphicon glyphicon-triangle-bottom"></div> 
           </div>
       </div>
-    </li>
-  </ul>
-</div>
-
-<div class="col-md-8">
-  <ui-gmap-google-map center='map.center' refresh="refreshMap" zoom="map.zoom"></ui-gmap-google-map>
-</div>
+    </li> -->
