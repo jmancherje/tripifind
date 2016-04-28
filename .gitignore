@@ -43,5 +43,5 @@ server/env/config.js
 # cache
 *.rdb
 
-*.env
+.env
 .sass-cache/
