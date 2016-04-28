@@ -27,11 +27,11 @@
           </li>
         </ul>
         <ul class="nav navbar-nav pull-xs-right">
-          <li class="nav-item" ng-show="isLoggedIn">
-            <a class="nav-link" ng-click="logout()">Logout</a>
+          <li class="nav-item">
+            <a class="nav-link" ng-click="login()" style="cursor: pointer" ng-show="!isLoggedIn">Login</a>
           </li>
-          <li class="nav-item" ng-hide="isLoggedIn" ng-cloak>
-            <a class="nav-link"  ng-click="logout()">Login</a>
+          <li class="nav-item">
+            <a class="nav-link" ng-click="logout()" style="cursor: pointer" ng-hide="!isLoggedIn" ng-cloak>Logout</a>
           </li>
         </ul>
       </div>
