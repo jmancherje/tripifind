@@ -10,6 +10,7 @@ angular.module('app.create', ['app.services'])
   // if true, the form will hide and the right side of page will populate
   $scope.formCompleted = false;
   $scope.cityLocation = {};
+  $scope.address = '';
   $scope.autoCompleteOptions = {
     componentRestrictions: { country : 'USA' },
     types: ['(cities)'] 
@@ -36,7 +37,7 @@ angular.module('app.create', ['app.services'])
           // $scope.activities is an array of all the activities found by the api
           // at the given destination
           var cityData = JSON.parse(data);
-          $scope.location = cityData.location;
+          $scope.cityLocation = cityData.location;
           $scope.activities = cityData.activities;
         });
     }
@@ -69,15 +70,17 @@ angular.module('app.create', ['app.services'])
   // see the documentation on services.js for more information.
   $scope.saveItinerary = function () {
     // POST request to /trips with $scope.itinerary 
+    const city = $scope.address.split(', ')[0]
+    const state = $scope.address.split(', ')[1]
     var tripObj = {
       name: $scope.itineraryName,
-      city: $scope.city,
-      state: $scope.state,
+      city: city,
+      state: state,
+      address: $scope.address,
       activities: $scope.itinerary,
       image: $scope.itineraryImage,
       location: $scope.cityLocation
     };
-    console.log('trip:', tripObj);
     var trip = JSON.stringify(tripObj);
     ActivitiesData.createTrip(trip);
   };
