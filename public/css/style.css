@@ -80,6 +80,7 @@ h1 {
 .playlist-card:empty {
   height: 0;
   border: none;
+  width: 200px;
 }
 .activitylist-left {
   height: 65vh;
