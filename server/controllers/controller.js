@@ -19,7 +19,10 @@ var filterTripData = function(responseObj) {
     if (item.venue.featuredPhotos) {
       photoURL = item.venue.featuredPhotos.items[0];
     } else {
-      photoURL = '';
+      photoURL = {
+        prefix: 'http://dogtowndogtraining.com/wp-content/uploads/2012/06/',
+        suffix: '-061-e1340955308953.jpg'
+      };
     }
     var notes = item.tips === undefined ? '' : item.tips[0].text; 
     var tripItem = {
