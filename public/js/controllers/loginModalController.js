@@ -5,4 +5,5 @@ angular.module('app.login', [])
   $scope.auth = auth;
 
   this.cancel = $scope.$dismiss;
+
 });
