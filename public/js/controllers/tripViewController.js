@@ -19,7 +19,6 @@ angular.module('app.trip', ['app.services'])
   ActivitiesData.getTripActivities($scope.id, function (tripObj) {
     $scope.dataLoaded = true;
     $scope.activities = tripObj.data.list;
-    console.log("Activities", $scope.activities)
     $scope.name = tripObj.data.name;
     $scope.destination = tripObj.data.destination;
 
@@ -30,8 +29,6 @@ angular.module('app.trip', ['app.services'])
         stopover: true
       });
     }
-
-    console.log(waypts)
 
     directionsService.route({
       origin: $scope.activities[0].address,

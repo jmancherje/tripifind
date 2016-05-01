@@ -300,3 +300,9 @@ body, html {
   margin:0 5%;
   height: 70vh;
 }
+
+.login-page .login-box {
+  padding: 100px 0;
+}
+
+
