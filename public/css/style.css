@@ -290,3 +290,13 @@ body, html {
 .vote {
   font-size: 30px;
 }
+
+/*map*/
+
+#map {
+  height: 100%;
+  float: left;
+  width: 90%;
+  margin:0 5%;
+  height: 70vh;
+}
