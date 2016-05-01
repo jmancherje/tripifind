@@ -34,6 +34,7 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
     clientID: 'INd2NB2FVHoVJJEQlPzH1oyrzwcbVqwJ'
   });
 
+
   authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
     console.log("Login Success");
     profilePromise.then(function(profile) {

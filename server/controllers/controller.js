@@ -10,11 +10,17 @@ var FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET;
 var filterTripData = function(responseObj) {
   var cityData = {};
   var activitiesRaw = responseObj.groups[0].items;
+  console.log('albequerque response ', activitiesRaw);
   cityData.location = responseObj.suggestedBounds;
   cityData.location.center = responseObj.geocode.center;
   cityData.activities = activitiesRaw.reduce(function(totalData, item) {
     var location = item.venue.location;
-    var photoURL = item.venue.featuredPhotos.items[0];
+    var photoURL;
+    if (item.venue.featuredPhotos) {
+      photoURL = item.venue.featuredPhotos.items[0];
+    } else {
+      photoURL = '';
+    }
     var notes = item.tips === undefined ? '' : item.tips[0].text; 
     var tripItem = {
       name: item.venue.name,
