@@ -45,17 +45,12 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 
   authProvider.on('loginFailure', function() {
      // Error Callback
+     alert("Login Failed. Please Try Again. :)")
   });
   
   $urlRouterProvider.otherwise('/')
 
   $stateProvider
-
-    .state('login', {
-      url: '/login',
-      templateUrl: './js/templates/login2.html',
-      controller: 'LoginCtrl'
-    })
     
     .state('landing', {
       url: '/',
