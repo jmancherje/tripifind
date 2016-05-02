@@ -1,6 +1,6 @@
 angular.module('app.navbar', ['app.services'])
 
-.controller('NavbarController', function ($scope, $state, LoginModal, auth, store) {
+.controller('NavbarController', function ($scope, $state, auth, store) {
   var profile = store.get("profile");
 
   console.log('auth in navbar controller: ', auth)

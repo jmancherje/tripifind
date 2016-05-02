@@ -1,5 +1,4 @@
 // app is called app
-// app.auth loads authentication controller
 // app.trip loads the tripViewController
 // app.landing loads the landing controller
 // app.create loads the createTrip controller
@@ -11,12 +10,10 @@ var app = angular.module('app', [
   'auth0',
   'angular-storage',
   'angular-jwt',
-  'app.auth',
   'app.trip',
   'app.landing',
   'app.create',
   'app.navbar',
-  'app.login',
   'app.services',
   'app.mytrips',
   'ui.sortable',
@@ -91,7 +88,7 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 })
 
 
-.run(function($rootScope, auth, store, jwtHelper, $location, LoginModal, $state) {
+.run(function($rootScope, auth, store, jwtHelper, $location, $state) {
   // This hooks al auth events to check everything as soon as the app starts
   auth.hookEvents();
   

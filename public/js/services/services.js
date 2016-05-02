@@ -128,30 +128,6 @@ angular.module('app.services',[])
   return data;
 })
 
-.factory('LoginModal', function ($uibModal, $rootScope) {
-
-  function assignCurrentUser (user) {
-    // $rootScope.currentUser = user;
-    // return user;
-    console.log('assign current user')
-    return 'hi'
-  }
-
-  return function() {
-    var instance = $uibModal.open({
-      templateUrl: './js/templates/loginModal.html',
-      controller: 'LoginModalCtrl',
-      controllerAs: 'LoginModalCtrl'
-    })
-
-    // return instance.result.then(assignCurrentUser);
-    return instance.result.then(function() { console.log('hi'); });
-  };
-
-})
-
-
-
 // this factory is for authentication which is not impemented in the app yet.
 .factory('Auth', function($http, $location){
   var auth = {};
