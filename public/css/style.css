@@ -64,6 +64,10 @@ h1 {
   width: 200px;
 }
 
+.playlist-card > img {
+  height: 200px;
+}
+
 .playlist-card:hover {
   -webkit-filter: brightness(50%);
 }
@@ -75,6 +79,18 @@ h1 {
 
   .playlist-card {
     margin: 3px;
+  }
+}
+
+@media (max-width: 472px) {
+
+  .playlist-card {
+    margin: 3px;
+    width: 300px;
+  }
+
+  .playlist-card > img {
+    height: 300px;
   }
 }
 
