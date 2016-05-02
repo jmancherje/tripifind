@@ -6,6 +6,5 @@ Itinerary manager
 # How to get started:
 
 1. npm install
-2. bower install
-3. npm start
-4. open on localhost
+2. npm start
+3. open on http://localhost:8080/
