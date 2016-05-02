@@ -12,7 +12,7 @@ angular.module('app.mytrips', ['app.services'])
       type: 'GET',
       url: '/api/users/trips',
       headers: {
-        authId: authId
+        authid: authId
       }
     }
 
