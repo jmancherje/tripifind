@@ -30,13 +30,15 @@
       <div class="activitylist-left">
         <div ng-repeat="activity in itinerary track by $index" class="card card-inverse" style="background-color: #333; border-color: #333;">
           <div class="card-block">
-            <h3 class="card-title">{{activity.name}}</h3>
-            <p class="card-text">{{activity.address.split(',')[0]}}</p>
-            <a ng-click="removeFromTrip()" class="btn btn-danger">Remove</a>
+            <div class="description">
+              <h3 class="card-title">{{activity.name}}</h3>
+              <p class="card-text">{{activity.address.split(',')[0]}}</p>
+            </div>
+            <a ng-click="removeFromTrip()" class="btn btn-danger inline">Remove</a>
           </div>
         </div>
       </div>
-      <button class="btn btn-primary" ng-click="saveItinerary()">Save Your Itinerary!</button>
+      <button class="btn btn-primary fixed-bottom" ng-click="saveItinerary()">Save Your Itinerary!</button>
     </section>
   </section>
 

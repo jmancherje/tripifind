@@ -20,6 +20,7 @@ body {
   width: 100%;
 }
 
+
 .navbar {
   margin-bottom: 10px;
 }
@@ -304,6 +305,28 @@ body, html {
 
 .login-page .login-box {
   padding: 100px 0;
+}
+
+@media (max-width: 500px) {
+  .fixed-bottom {
+    position: fixed;
+    bottom 0;
+    width: 85%;
+    z-index: 3;
+    border: 10px white;
+  }
+
+  .inline {
+    display: inline-block;
+    width: 35%;
+    vertical-align: top;
+    margin-top: .6em;
+  }
+
+  .description {
+    display: inline-block;
+    width: 60%;
+  }
 }
 
 
