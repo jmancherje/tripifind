@@ -36,13 +36,11 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 
 
   authProvider.on('loginSuccess', function($location, profilePromise, idToken, store, $rootScope) {
-    console.log("Login Success");
     profilePromise.then(function(profile) {
       $rootScope.user = profile;
       store.set('profile', profile);
       store.set('token', idToken);
     });
-    $location.path('/');
   });
 
   authProvider.on('loginFailure', function() {
@@ -119,8 +117,3 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
   $scope.auth = auth;
 
 });
-
-// app.run(function ($rootScope, $state, LoginModal) {
-
-
-// });
