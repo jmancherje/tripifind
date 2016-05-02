@@ -1,12 +1,11 @@
 angular.module('app.mytrips', ['app.services'])
 
-// ActivitiesData is a factory/service laoded from app.services
-// $location is for redirecting
 .controller('MyTripsController', function ($scope, $http, ActivitiesData, $location, store) {
 
   $scope.trips = [];
 
   function init() {
+    // TODO: abstract this functionality / HTTP request to service
     var authId = store.get('profile').user_id;
     var request = {
       type: 'GET',
@@ -16,12 +15,9 @@ angular.module('app.mytrips', ['app.services'])
       }
     }
 
-    console.log('request: ', request);
-
     $http(request)
-      .then(function(trips) {
-        $scope.trips = trips;
-        console.log('got all trips:', trips);
+      .then(function(res) {
+        $scope.trips = res.data;
       })
   }
 
