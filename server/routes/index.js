@@ -8,7 +8,7 @@ const userRouter = require('./user_routes');
 const router = express.Router();
 router.use('/activities', activitiesRouter);
 router.use('/trips', tripsRouter);
-router.use('/user/', userRouter);
+router.use('/users', userRouter);
 
 module.exports = router;
 
