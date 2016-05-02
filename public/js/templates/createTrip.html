@@ -27,11 +27,11 @@
     <section class="itineraryDetails">
       <h2>{{itineraryName}}</h2>
       <h4>{{address}}</h4>
-      <div class="activitylist-left">
+      <div class="activitylist-left list-resp">
         <div ng-repeat="activity in itinerary track by $index" class="card card-inverse" style="background-color: #333; border-color: #333;">
           <div class="card-block">
             <div class="description">
-              <h3 class="card-title">{{activity.name}}</h3>
+              <h3 class="card-title resp-title">{{activity.name}}</h3>
               <p class="card-text">{{activity.address.split(',')[0]}}</p>
             </div>
             <a ng-click="removeFromTrip()" class="btn btn-danger inline">Remove</a>
@@ -44,15 +44,15 @@
 
   <!-- list of activities from API -->
   <section ng-show="formCompleted" class="selection-list col-sm-6 col-lg-8 col-xl-9 text-center right-column">
-    <h4>Activities</h4>
-      <section class="activity-grid">
+    <h4 class="h4-resp">Activities</h4>
+      <section class="activity-grid grid-resp">
 
-        <div class="card activity-card card-inverse" style="background-color: #333; border-color: #333; width: 202px; position: relative" ng-repeat="activity in activities | orderBy:'-rating'">
+        <div class="card activity-card card-inverse card-act card-resp" ng-repeat="activity in activities | orderBy:'-rating'">
           <div class="card-block">
-            <h4 class="card-title">{{activity.name}}</h4>
+            <h4 class="card-title h4-resp">{{activity.name}}</h4>
             <h6 class="card-subtitle text-muted">{{activity.category}}</h6>
           </div>
-          <img ng-src="{{activity.photo}}" height="200px" alt="image of {{activity.name}}">
+          <img class="place-img" ng-src="{{activity.photo}}" alt="image of {{activity.name}}">
           <div class="card-block">
             <a href="{{activity.url}}" class="card-link">Website</a>
             <a href="#" class="card-link">Foursquare</a>

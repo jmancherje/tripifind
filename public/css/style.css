@@ -307,10 +307,21 @@ body, html {
   padding: 100px 0;
 }
 
+.card-act {
+  background-color: #333; 
+  border-color: #333; 
+  width: 202px; 
+  position: relative;
+}
+
+.place-img {
+  max-width: 100%;
+}
+
 @media (max-width: 500px) {
   .fixed-bottom {
     position: fixed;
-    bottom 0;
+    bottom: 0px;
     width: 85%;
     z-index: 3;
     border: 10px white;
@@ -321,11 +332,36 @@ body, html {
     width: 35%;
     vertical-align: top;
     margin-top: .6em;
+    margin-bottom: 1em;
   }
 
   .description {
     display: inline-block;
     width: 60%;
+  }
+
+  .grid-resp {
+    height: 60vh;
+    overflow: auto;
+    margin-top: 1em;
+  }
+
+  .list-resp {
+    max-height: 20vh;
+    overflow: auto;
+    margin-bottom: 1em;
+
+  }
+  .resp-title {
+    font-size: 1.2rem;
+  }
+
+  .card-resp {
+    width: 45%;
+  }
+
+  .h4-resp {
+    font-size: 1.1rem;
   }
 }
 
