@@ -1,8 +1,13 @@
 angular.module('app.mytrips', ['app.services'])
 
-.controller('MyTripsController', function ($scope, $http, ActivitiesData, $location, store) {
+.controller('MyTripsController', function ($scope, $http, ActivitiesData, $state, store, $location) {
 
   $scope.trips = [];
+
+  $scope.viewTrip = function(index) {
+    // $state.go('trip')
+    $location.path('/trip/' + $scope.trips[index]._id)
+  }
 
   function init() {
     // TODO: abstract this functionality / HTTP request to service

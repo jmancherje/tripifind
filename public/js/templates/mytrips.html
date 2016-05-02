@@ -1,6 +1,6 @@
 
   <h1 class="page-title">My Trips</h1>
-  <div class="col-lg-10 col-lg-offset-1">
+<!--   <div class="col-lg-10 col-lg-offset-1">
     trip names:
     <ul>
       
@@ -9,5 +9,29 @@
       </li>
 
     </ul>
-  </div>  
+  </div>  --> 
+  <div class="col-xl-10 col-xl-offset-1">
+    <h2 class="list-title">My Trips:</h2>
+    <div class="playlist-grid" >
+      <div class="card card-inverse playlist-card" style="background-color: #333; border-color: #333;" ng-repeat="trip in trips | filter:filter" ng-click="viewTrip(trips.indexOf(trip))">
+        <img class="card-img-top" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
+        <div class="card-block">
+          <h4 class="card-title trip-name">{{trip.name}}</h4>
+          <p class="card-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
+        </div>
+      </div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+      <div class="playlist-card"></div>
+    </div>
+  </div>
 
