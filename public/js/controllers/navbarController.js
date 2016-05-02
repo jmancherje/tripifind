@@ -9,7 +9,6 @@ angular.module('app.navbar', ['app.services'])
     return store.get("profile");
   }, function() {
     var profile = store.get("profile");
-    console.log('profile changed..')
     if (!auth.profile) {
       $scope.user = undefined;
     } else {

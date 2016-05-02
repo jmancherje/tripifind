@@ -30,6 +30,7 @@ module.exports = {
       destination: [req.body.city, req.body.state],
       image: req.body.image,
       activities: req.body.activityIds,
+      user_id: req.headers.auth || 1,
       location: {
         ne: {
           lat: req.body.location.ne.lat,
