@@ -35,9 +35,10 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
   });
 
 
-  authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
+  authProvider.on('loginSuccess', function($location, profilePromise, idToken, store, $rootScope) {
     console.log("Login Success");
     profilePromise.then(function(profile) {
+      $rootScope.user = profile;
       store.set('profile', profile);
       store.set('token', idToken);
     });
@@ -80,12 +81,29 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 })
 
 
-.run(function(auth) {
+.run(function($rootScope, auth, store, jwtHelper, $location) {
   // This hooks al auth events to check everything as soon as the app starts
   auth.hookEvents();
+  
+  // This events gets triggered on refresh or URL change
+  $rootScope.$on('$locationChangeStart', function() {
+    var token = store.get('token');
+    if (token) {
+      if (!jwtHelper.isTokenExpired(token)) {
+        if (!auth.isAuthenticated) {
+          auth.authenticate(store.get('profile'), token);
+        }
+      } else {
+        // Either show the login page or use the refresh token to get a new idToken
+        $location.path('/');
+      }
+    }
+  });
+
 })
 
 .controller('LoginCtrl', function ( $scope, auth) {
+
   $scope.auth = auth;
 
 });

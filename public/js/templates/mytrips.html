@@ -1,42 +1,6 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/#landing">Tripifind</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/#create">Create A Trip</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<!-- Content -->
-  <h1 class="page-title">Playlists</h1>
-  <input type="text" ng-model="filter.destination" id="landing-filter" placeholder="Search By City">
+  <h1 class="page-title">My Trips</h1>
   <div class="col-lg-10 col-lg-offset-1">
-    <span class="playlist" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
-      <div class="playlist-img">
-        <img class="trip-img" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
-      </div>
-      <div class="playlist-info">
-        <p class="glyphicon glyphicon-play-circle play-icon"></p>
-        <p class="trip-name trip-box-text">{{trip.name}}</p>
-        <p class="trip-destination trip-box-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
-      </div>
-    </span>
+    stuff goes here
   </div>  
 
