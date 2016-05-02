@@ -98,8 +98,9 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     var requireLogin = toState.data.requireLogin;
     var token = store.get('token');
+    var user = store.get('profile');
 
-    if (requireLogin && (!auth.isAuthenticated || jwtHelper.isTokenExpired(token))) {
+    if (requireLogin && (!user || jwtHelper.isTokenExpired(token))) {
       event.preventDefault();
 
       auth.signin({}, function(profile, idToken, accessToken, state, refreshToken) {
