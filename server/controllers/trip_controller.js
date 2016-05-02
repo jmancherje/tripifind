@@ -1,6 +1,7 @@
-var Trips = require('../models/trips.js');
-var TripItems = require('../models/tripItem.js');
-var h = require('../helpers/filter_json.js');
+var Trips = require('../models/trips');
+var TripItems = require('../models/tripItem');
+var User = require('../models/users');
+var h = require('../helpers/filter_json');
 var request = require('request');
 
 var FOURSQUARE_APIKEY = process.env.FOURSQUARE_API;
