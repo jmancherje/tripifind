@@ -6,22 +6,12 @@ angular.module('app.trip', ['app.services'])
 .controller('TripController', function ($scope, $http, ActivitiesData, $stateParams, $document) {
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
+  $scope.activities = [];
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 6,
-    center: {lat: 41.85, lng: -87.65}
-  });
-  directionsDisplay.setMap(map);
-
-  // $scope.id stores the trip mongoose _.id
-  $scope.id = $stateParams.id;
-  
-  ActivitiesData.getTripActivities($scope.id, function (tripObj) {
-    $scope.dataLoaded = true;
-    $scope.activities = tripObj.data.list;
-    $scope.name = tripObj.data.name;
-    $scope.destination = tripObj.data.destination;
-
+  function renderMap() {
+    if ($scope.activities.length === 0) {
+      return;
+    }
     var waypts = [];
     for (var i = 1; i < $scope.activities.length - 1; i++) {
       waypts.push({
@@ -55,10 +45,28 @@ angular.module('app.trip', ['app.services'])
         window.alert('Directions request failed due to ' + status);
       }
     });
+  }
 
-
-
-
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 6,
+    center: {lat: 41.85, lng: -87.65}
   });
+  directionsDisplay.setMap(map);
+
+  // $scope.id stores the trip mongoose _.id
+  $scope.id = $stateParams.id;
+  
+  ActivitiesData.getTripActivities($scope.id, function (tripObj) {
+    $scope.dataLoaded = true;
+    $scope.activities = tripObj.data.list;
+    $scope.name = tripObj.data.name;
+    $scope.destination = tripObj.data.destination;
+
+    // renderMap();
+  });
+
+  $scope.$watchCollection('activities', function(newOrder, oldOrder) {
+    renderMap();
+  })
 
 })
