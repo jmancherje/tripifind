@@ -4,8 +4,7 @@ var tripsSchema = mongoose.Schema({
   name: String,
   destination: Array,
   image: String,
-  //keyword: drinking, bars
-  //users
+  user_id: String,
   location: {
     ne: {
       lat: Number,
@@ -20,8 +19,10 @@ var tripsSchema = mongoose.Schema({
       lng: Number
     }
   },
-  activities : [{ type: mongoose.Schema.ObjectId,
-    ref: 'tripItem' }]
+  activities : [{ 
+    type: mongoose.Schema.ObjectId,
+    ref: 'tripItem' 
+  }]
 });
 
 var Trip = mongoose.model('Trip', tripsSchema);
