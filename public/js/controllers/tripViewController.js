@@ -61,8 +61,6 @@ angular.module('app.trip', ['app.services'])
     $scope.activities = tripObj.data.list;
     $scope.name = tripObj.data.name;
     $scope.destination = tripObj.data.destination;
-
-    // renderMap();
   });
 
   $scope.$watchCollection('activities', function(newOrder, oldOrder) {
