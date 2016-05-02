@@ -57,46 +57,58 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
     .state('landing', {
       url: '/',
       templateUrl: './js/templates/landing.html',
-      controller: 'LandingController'
+      controller: 'LandingController',
+      data: {
+        requireLogin: false
+      }
     })
 
     .state('createTrip', {
       url: '/create',
       templateUrl: './js/templates/createTrip.html',
-      controller: 'CreateTripController'
+      controller: 'CreateTripController',
+      data: {
+        requireLogin: true
+      }
     })
 
     .state('myTrips', {
       url: '/mytrips',
       templateUrl: './js/templates/mytrips.html',
-      controller: 'MyTripsController'
+      controller: 'MyTripsController',
+      data: {
+        requireLogin: true
+      }
     })
 
     .state('trip', {
       url: '/trip/:id',
       templateUrl: './js/templates/tripView.html',
-      controller: 'TripController'
+      controller: 'TripController',
+      data: {
+        requireLogin: false
+      }
     })
 
 })
 
 
-.run(function($rootScope, auth, store, jwtHelper, $location) {
+.run(function($rootScope, auth, store, jwtHelper, $location, LoginModal, $state) {
   // This hooks al auth events to check everything as soon as the app starts
   auth.hookEvents();
   
-  // This events gets triggered on refresh or URL change
-  $rootScope.$on('$locationChangeStart', function() {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    var requireLogin = toState.data.requireLogin;
     var token = store.get('token');
-    if (token) {
-      if (!jwtHelper.isTokenExpired(token)) {
-        if (!auth.isAuthenticated) {
-          auth.authenticate(store.get('profile'), token);
-        }
-      } else {
-        // Either show the login page or use the refresh token to get a new idToken
-        $location.path('/');
-      }
+
+    if (requireLogin && (!auth.isAuthenticated || jwtHelper.isTokenExpired(token))) {
+      event.preventDefault();
+
+      auth.signin({}, function(profile, idToken, accessToken, state, refreshToken) {
+        $state.go(toState.name, toParams);
+      }, function(err) {
+        $state.go('landing');
+      })
     }
   });
 
@@ -110,20 +122,5 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 
 // app.run(function ($rootScope, $state, LoginModal) {
 
-//   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-//     var requireLogin = toState.data.requireLogin;
-
-//     if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
-//       event.preventDefault();
-
-//       LoginModal()
-//         .then(function () {
-//           return $state.go(toState.name, toParams);
-//         })
-//         .catch(function () {
-//           return $state.go('welcome');
-//         });
-//     }
-//   });
 
 // });
