@@ -7,31 +7,18 @@ var bluebird = require('bluebird');
 
 module.exports = {
 
-  findAllUserTrips: function(req, res, next) {
-    const userId = req.headers.userId;
-    User.findOne({ auth_id: userId }, function(err, user) {
-      if (err) { 
-        console.log("can't find user, error:", err)
-        return err; 
-      } else {
-        console.log("found user: ", user);
-        return user;
-      }
-    })
-    .then(function(user){
-      return Trips.find({
-        '_id': {
-          $in: user.trips
-        }
+  findTripsByUser: function(req, res, next) {
+    const userId = req.headers.authid;
+    Trips.find()
+      .where('user_id').equals(userId)
+      .then(function(trips) {
+        res.status(200).send(trips);
       })
-    })
-    .then(function(trips) {
-      res.status(200).send(trips);
-    })
-    .catch(function(error) {
-      console.error('error finding users trips', error);
-    })
+      .catch(function(error) {
+        console.error('error finding users trips', error);
+      })
   }
+
 };
 
      
