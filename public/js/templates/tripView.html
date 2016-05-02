@@ -1,7 +1,7 @@
 <h2 class="page-title">{{name}}</h2>
 <h4 class="page-title">{{destination[0]}}, {{destination[1]}}</h4>
 
-<div class="tripview-container col-md-4">
+<div class="tripview-container col-md-6 col-lg-4">
   <ol ui-sortable ng-model="activities">
     <li ng-repeat="activity in activities track by $index" class="trip-numbered-item">
       <div class="card card-inverse" style="background-color: #333; border-color: #333;">
@@ -16,7 +16,7 @@
   </ol>
 </div>
 
-<div class="col-md-8">
+<div class="col-md-6 col-lg-8">
   <section id="map">
     
   </section>
