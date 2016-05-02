@@ -21,7 +21,7 @@ angular.module('app.navbar', ['app.services'])
   $scope.isLoggedIn = !!profile;
   
   $scope.login = function() {
-    LoginModal();
+    auth.signin();
   }
 
   $scope.logout = function() {
