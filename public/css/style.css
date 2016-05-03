@@ -334,7 +334,7 @@ body, html {
   max-width: 100%;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
 
   .fixed-bottom {
     position: fixed;
