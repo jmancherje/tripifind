@@ -51,7 +51,7 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
     
     .state('landing', {
       url: '/',
-      templateUrl: './js/templates/landing.html',
+      templateUrl: './js/landing/landing.html',
       controller: 'LandingController',
       data: {
         requireLogin: false
@@ -60,7 +60,7 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 
     .state('createTrip', {
       url: '/create',
-      templateUrl: './js/templates/createTrip.html',
+      templateUrl: './js/createTrip/createTrip.html',
       controller: 'CreateTripController',
       data: {
         requireLogin: true
@@ -69,7 +69,7 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 
     .state('myTrips', {
       url: '/mytrips',
-      templateUrl: './js/templates/mytrips.html',
+      templateUrl: './js/myTrips/mytrips.html',
       controller: 'MyTripsController',
       data: {
         requireLogin: true
@@ -78,7 +78,7 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
 
     .state('trip', {
       url: '/trip/:id',
-      templateUrl: './js/templates/tripView.html',
+      templateUrl: './js/tripView/tripView.html',
       controller: 'TripController',
       data: {
         requireLogin: false
