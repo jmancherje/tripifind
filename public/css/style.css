@@ -335,6 +335,7 @@ body, html {
 }
 
 @media (max-width: 500px) {
+
   .fixed-bottom {
     position: fixed;
     bottom: 0px;
@@ -360,6 +361,7 @@ body, html {
     height: 60vh;
     overflow: auto;
     margin-top: 1em;
+    display: block;
   }
 
   .list-resp {
@@ -379,6 +381,11 @@ body, html {
   .h4-resp {
     font-size: 1.1rem;
   }
+
+  .place-img {
+    width: 100%;
+  }
+
 }
 
 
