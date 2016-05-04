@@ -179,9 +179,9 @@ module.exports = {
   // Method: Get
   // Route : /trips
   getAllTrips: function (req, res, next) {
-    console.log('getting all trips...')
     Trips.find(function (err, results) {
-      res.json(results)
+      console.log('got all trips!!');
+      res.status(200).json(results);
     });
   },
 

@@ -5,7 +5,7 @@ const jwtCheck = require('../middleware/auth').jwtCheck;
 
 const router = express.Router();
 router.get('/', controller.getAllTrips);
-router.post('/', jwtCheck, tripController.saveActivities, tripController.createTrip);
+router.post('/', tripController.saveActivities, tripController.createTrip);
 router.get('/:id', controller.accessTrip);
 
 module.exports = router;

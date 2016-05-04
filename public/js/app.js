@@ -26,7 +26,6 @@ var app = angular.module('app', [
 ])
 
 app.config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProvider, jwtInterceptorProvider) {
-
   
   $urlRouterProvider.otherwise('/')
 
@@ -111,11 +110,30 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProv
   // This hooks al auth events to check everything as soon as the app starts
   auth.hookEvents();
 
-  $rootScope.$on('$locationChangeStart', function() {
-    // Get the JWT that is saved in local storage
-    // and if it is there, check whether it is expired.
-    // If it isn't, set the user's auth state
+  // $rootScope.$on('$stateChangeStart', function() {
+  //   // Get the JWT that is saved in local storage
+  //   // and if it is there, check whether it is expired.
+  //   // If it isn't, set the user's auth state
+  //   var token = store.get('token');
+  // });
+  
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    var requireLogin = toState.data.requireLogin;
     var token = store.get('token');
+    var user = store.get('profile');
+
+    // protecting authenticated routes
+    if (requireLogin) {
+      event.preventDefault();
+
+      auth.signin({}, function(profile, idToken, accessToken, state, refreshToken) {
+        $state.go(toState.name, toParams);
+      }, function(err) {
+        $state.go('landing');
+      })
+    }
+
+    // for refreshing
     if (token) {
       if (!jwtHelper.isTokenExpired(token)) {
         if (!auth.isAuthenticated) {
@@ -125,23 +143,7 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProv
     }
     else {
       // Otherwise, redirect to the home route
-      $location.path('/home');
-    }
-  });
-  
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-    var requireLogin = toState.data.requireLogin;
-    var token = store.get('token');
-    var user = store.get('profile');
-
-    if (requireLogin && (!user || jwtHelper.isTokenExpired(token))) {
-      event.preventDefault();
-
-      auth.signin({}, function(profile, idToken, accessToken, state, refreshToken) {
-        $state.go(toState.name, toParams);
-      }, function(err) {
-        $state.go('landing');
-      })
+      $state.go('landing');
     }
   });
 
