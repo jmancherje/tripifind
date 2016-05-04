@@ -5,7 +5,13 @@ const activitiesRouter = require('./activities_routes');
 const tripsRouter = require('./trips_routes');
 const userRouter = require('./user_routes');
 
+const jwtCheck = require('../middleware/auth').jwtCheck;
+
 const router = express.Router();
+router.get('/jwt', jwtCheck, function(req, res) {
+  console.log('made it past the jwtCheck');
+  res.sendStatus(200);
+})
 router.use('/activities', activitiesRouter);
 router.use('/trips', tripsRouter);
 router.use('/users', userRouter);
