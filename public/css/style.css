@@ -59,7 +59,7 @@ h1 {
 .playlist-card {
   margin: 5px;
   cursor: pointer;
-  /*max-width: 200px;*/
+  padding: 2px 3px 0 2px;
 }
 
 .playlist-card:hover {
@@ -325,7 +325,7 @@ body, html {
 }
 
 .place-img {
-  width: 99%;
+  width: 100%;
 }
 
 @media (max-width: 550px) {

@@ -34,10 +34,10 @@
               <a class="nav-link" ui-sref="profile">Hi, {{auth.profile.nickname}}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" ng-click="login()" style="cursor: pointer" ng-show="!isLoggedIn">Login</a>
+              <a class="nav-link" ng-click="login()" style="cursor: pointer" ng-show="!auth.isAuthenticated">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" ng-click="logout()" style="cursor: pointer" ng-hide="!isLoggedIn" ng-cloak>Logout</a>
+              <a class="nav-link" ng-click="logout()" style="cursor: pointer" ng-hide="!auth.isAuthenticated" ng-cloak>Logout</a>
             </li>
           </ul>
         </div>

@@ -3,6 +3,7 @@ angular.module('app.mytrips', ['app.services'])
 .controller('MyTripsController', function ($scope, $http, ActivitiesData, $state, store, $location) {
 
   $scope.trips = [];
+  $scope.showTrips = false;
 
 
   $scope.viewTrip = function(index) {
@@ -24,7 +25,7 @@ angular.module('app.mytrips', ['app.services'])
     $http(request)
       .then(function(res) {
         $scope.trips = res.data;
-        console.log($scope.trips.length)
+        $scope.showTrips = true;
       })
       .catch(function(err) {
         console.log('error fetching trips: ', err)

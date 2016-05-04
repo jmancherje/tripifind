@@ -1,18 +1,20 @@
 
   <h1 class="page-title">My Trips</h1>
   <div class="col-xl-10 col-xl-offset-1">
-    <div class="masonry2" ng-show="trips.length">
-      <div class="card card-inverse playlist-card pin" style="background-color: #333; border-color: #333;" ng-repeat="trip in trips | filter:filter" ng-click="viewTrip(trips.indexOf(trip))">
-        <img class="card-img-top place-img" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
-        <div class="card-block">
-          <h4 class="card-title trip-name">{{trip.name}}</h4>
-          <p class="card-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
+    <div ng-show="showTrips">
+      <div class="masonry2" ng-show="trips.length">
+        <div class="card card-inverse playlist-card pin" style="background-color: #333; border-color: #333;" ng-repeat="trip in trips | filter:filter" ng-click="viewTrip(trips.indexOf(trip))">
+          <img class="card-img-top place-img" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
+          <div class="card-block">
+            <h4 class="card-title trip-name">{{trip.name}}</h4>
+            <p class="card-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div ng-show="!trips.length">
-      <h5>You haven't created any trips yet :(</h5>
-      <a ui-sref="createTrip"><h5>Make one now!</h5></a>
+      <div ng-show="!trips.length">
+        <h5>You haven't created any trips yet :(</h5>
+        <a ui-sref="createTrip"><h5>Make one now!</h5></a>
+      </div>
     </div>
   </div>
 
