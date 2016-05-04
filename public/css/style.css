@@ -24,9 +24,7 @@ body {
 .navbar {
   margin-bottom: 10px;
 }
-.playlist-card {
-  overflow: hidden;
-}
+
 .angular-google-map-container { 
   height: 50vh;
 }
@@ -327,7 +325,7 @@ body, html {
 }
 
 .place-img {
-  width: 100%;
+  width: 99%;
 }
 
 @media (max-width: 550px) {
