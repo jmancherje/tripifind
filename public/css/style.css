@@ -64,10 +64,6 @@ h1 {
   /*max-width: 200px;*/
 }
 
-.playlist-card > img {
-  /*height: 200px;*/
-}
-
 .playlist-card:hover {
   -webkit-filter: brightness(50%);
 }
@@ -380,10 +376,6 @@ body, html {
 
   .h4-resp {
     font-size: 1.1rem;
-  }
-
-  .place-img {
-    width: 100%;
   }
 
 }
