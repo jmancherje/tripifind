@@ -24,26 +24,8 @@ var app = angular.module('app', [
   'google.places'
 ])
 
-app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProvider, jwtInterceptorProvider) {
 
-  authProvider.init({
-    domain: 'tripifind.auth0.com',
-    clientID: 'INd2NB2FVHoVJJEQlPzH1oyrzwcbVqwJ'
-  });
-
-
-  authProvider.on('loginSuccess', function($location, profilePromise, idToken, store, $rootScope) {
-    profilePromise.then(function(profile) {
-      $rootScope.user = profile;
-      store.set('profile', profile);
-      store.set('token', idToken);
-    });
-  });
-
-  authProvider.on('loginFailure', function() {
-     // Error Callback
-     alert("Login Failed. Please Try Again. :)")
-  });
   
   $urlRouterProvider.otherwise('/')
 
@@ -84,6 +66,33 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider) {
         requireLogin: false
       }
     })
+
+  authProvider.init({
+    domain: 'tripifind.auth0.com',
+    clientID: 'INd2NB2FVHoVJJEQlPzH1oyrzwcbVqwJ'
+  });
+
+
+  authProvider.on('loginSuccess', function($location, profilePromise, idToken, store, $rootScope) {
+    profilePromise.then(function(profile) {
+      $rootScope.user = profile;
+      store.set('profile', profile);
+      store.set('token', idToken);
+    });
+  });
+
+  authProvider.on('loginFailure', function() {
+     // Error Callback
+     alert("Login Failed. Please Try Again. :)")
+  });
+
+  jwtInterceptorProvider.tokenGetter = function(auth) {
+    return auth.idToken;
+    // or
+    // return store.get('token');
+  }
+
+  $httpProvider.interceptors.push('jwtInterceptor');
 
 })
 
