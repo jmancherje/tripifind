@@ -21,6 +21,7 @@
     "bower": "1.5.2",
     "dotenv": "^2.0.0",
     "express": "^4.13.3",
+    "express-jwt": "^3.3.0",
     "express-session": "^1.12.1",
     "mongoose": "^4.3.4",
     "morgan": "^1.6.1",
