@@ -4,6 +4,7 @@ angular.module('app.mytrips', ['app.services'])
 
   $scope.trips = [];
 
+
   $scope.viewTrip = function(index) {
     // $state.go('trip')
     $location.path('/trip/' + $scope.trips[index]._id)
@@ -23,6 +24,10 @@ angular.module('app.mytrips', ['app.services'])
     $http(request)
       .then(function(res) {
         $scope.trips = res.data;
+        console.log($scope.trips.length)
+      })
+      .catch(function(err) {
+        console.log('error fetching trips: ', err)
       })
   }
 
