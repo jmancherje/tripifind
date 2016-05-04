@@ -16,6 +16,7 @@ var app = angular.module('app', [
   'app.navbar',
   'app.services',
   'app.mytrips',
+  'app.profile',
   'ui.sortable',
   'uiGmapgoogle-maps',
   'ui.router',
@@ -67,6 +68,15 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProv
       }
     })
 
+    .state('profile', {
+      url: '/profile',
+      templateUrl: './js/profile/profile.html',
+      controller: 'ProfileController',
+      data: {
+        requireLogin: true
+      }
+    })
+
   authProvider.init({
     domain: 'tripifind.auth0.com',
     clientID: 'INd2NB2FVHoVJJEQlPzH1oyrzwcbVqwJ'
@@ -100,6 +110,24 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProv
 .run(function($rootScope, auth, store, jwtHelper, $location, $state) {
   // This hooks al auth events to check everything as soon as the app starts
   auth.hookEvents();
+
+  $rootScope.$on('$locationChangeStart', function() {
+    // Get the JWT that is saved in local storage
+    // and if it is there, check whether it is expired.
+    // If it isn't, set the user's auth state
+    var token = store.get('token');
+    if (token) {
+      if (!jwtHelper.isTokenExpired(token)) {
+        if (!auth.isAuthenticated) {
+          auth.authenticate(store.get('profile'), token);
+        }
+      }
+    }
+    else {
+      // Otherwise, redirect to the home route
+      $location.path('/home');
+    }
+  });
   
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     var requireLogin = toState.data.requireLogin;
