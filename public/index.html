@@ -29,8 +29,8 @@
           </li>
         </ul>
         <ul class="nav navbar-nav pull-xs-right">
-          <li class="nav-item" ng-if="user" ng-cloak>
-            <a class="nav-link" style="cursor: pointer" ng-hide="!isLoggedIn" ng-cloak>Logged in as {{user}}</a>
+          <li class="nav-item" ng-if="auth.profile" ng-cloak>
+            <a class="nav-link" ui-sref="profile">Hi, {{auth.profile.nickname}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" ng-click="login()" style="cursor: pointer" ng-show="!isLoggedIn">Login</a>
@@ -93,6 +93,7 @@
   <script src="js/myTrips/myTripController.js"></script>
   <script src="js/tripView/tripViewController.js"></script>
   <script src="js/navbar/navbarController.js"></script>
+  <script src="js/profile/profileController.js"></script>
   <script src="js/services/services.js"></script>
   
 </html>
