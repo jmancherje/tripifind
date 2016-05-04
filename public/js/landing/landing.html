@@ -1,10 +1,10 @@
 <div class="col-xl-10 col-xl-offset-1">
   <h2 class="list-title">Popular Trips:</h2>
-  <div class="playlist-grid" >
-    <div class="card card-inverse playlist-card" style="background-color: #333; border-color: #333;" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
-      <img class="card-img-top" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
+  <div class="masonry2" >
+    <div class="card card-inverse playlist-card pin" style="background-color: #333; border-color: #333;" ng-repeat="trip in tripResults | filter:filter" ng-click="viewTrip(tripResults.indexOf(trip))">
+      <img class="card-img-top place-img" ng-src="{{trip.image}}" alt="image of {{trip.name}}, {{trip.destination[0]}}">
       <div class="card-block">
-        <h4 class="card-title trip-name">{{trip.name}}</h4>
+        <h5 class="card-title">{{trip.name}}</h5>
         <p class="card-text">{{trip.destination[0]}}, {{trip.destination[1]}}</p>
       </div>
     </div>

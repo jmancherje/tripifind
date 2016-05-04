@@ -61,11 +61,11 @@ h1 {
 .playlist-card {
   margin: 5px;
   cursor: pointer;
-  width: 200px;
+  /*max-width: 200px;*/
 }
 
 .playlist-card > img {
-  height: 200px;
+  /*height: 200px;*/
 }
 
 .playlist-card:hover {
@@ -331,7 +331,7 @@ body, html {
 }
 
 .place-img {
-  max-width: 100%;
+  width: 100%;
 }
 
 @media (max-width: 550px) {
