@@ -120,9 +120,9 @@
     }
 
     .masonry2 {
-        -moz-column-count: 4;
-        -webkit-column-count: 4;
-        column-count: 4;
+        -moz-column-count: 7;
+        -webkit-column-count: 7;
+        column-count: 7;
         column-fill: balance;
     }
 }
