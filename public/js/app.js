@@ -123,10 +123,6 @@ app.config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProv
         }
       }
     }
-    else {
-      // Otherwise, redirect to the home route
-      $state.go('landing');
-    }
   });
   
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
